@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Dumbbell, Boxes, MapPin, Trophy, Wrench } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import ChamadoManutencaoModal from '../components/ChamadoManutencaoModal'
+import AutenticacaoModal from '../components/AutenticacaoModal'
 import BannerSlider from '../components/BannerSlider'
 import sugestaoImg from '../assets/sugestao.png'
 import equipamentosImg from '../assets/equipamentos.png'
@@ -63,6 +64,7 @@ function Card({
 export default function Home() {
   const navigate = useNavigate()
   const [chamadoAberto, setChamadoAberto] = useState(false)
+  const [acessoAberto, setAcessoAberto] = useState(false)
 
   return (
     <div className="w-full flex-1 bg-[#212120] px-16 pb-10 pt-10 text-white">
@@ -112,7 +114,10 @@ export default function Home() {
       </div>
 
       {/* CTA final */}
-      <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-sm font-extrabold uppercase tracking-wide text-black transition hover:brightness-110">
+      <button
+        onClick={() => setAcessoAberto(true)}
+        className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-sm font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+      >
         Entrar / Registrar-se
       </button>
 
@@ -128,6 +133,10 @@ export default function Home() {
 
       {chamadoAberto && (
         <ChamadoManutencaoModal onFechar={() => setChamadoAberto(false)} />
+      )}
+
+      {acessoAberto && (
+        <AutenticacaoModal onFechar={() => setAcessoAberto(false)} />
       )}
     </div>
   )
