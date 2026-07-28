@@ -7,6 +7,7 @@ import {
   type CategoriaId,
   type Equipamento,
 } from '../data/equipamentos'
+import { useEquipamentosEmManutencao } from '../data/manutencao'
 
 export const ZOOM_MIN = 1
 export const ZOOM_MAX = 2.5
@@ -33,15 +34,29 @@ export function useGymMap({
     todosEquipamentos.filter((e) => e.favorito).map((e) => e.id)
   )
 
+  // chamados abertos sobrescrevem o status vindo do catálogo
+  const emManutencao = useEquipamentosEmManutencao()
+
+  const comManutencao = useCallback(
+    (equipamento: Equipamento): Equipamento =>
+      emManutencao.has(equipamento.id)
+        ? { ...equipamento, status: 'manutencao', tempoRestanteMin: undefined }
+        : equipamento,
+    [emManutencao]
+  )
+
   const equipamentosFiltrados = useMemo(() => {
-    const daCategoria = equipamentosDaCategoria(categoria)
+    const daCategoria = equipamentosDaCategoria(categoria).map(comManutencao)
     const termo = busca.trim().toLowerCase()
     if (!termo) return daCategoria
     return daCategoria.filter((e) => e.nome.toLowerCase().includes(termo))
-  }, [categoria, busca])
+  }, [categoria, busca, comManutencao])
 
-  const equipamentoSelecionado: Equipamento | null = selectedEquipment
-    ? buscarEquipamento(selectedEquipment) ?? null
+  const encontrado = selectedEquipment
+    ? buscarEquipamento(selectedEquipment)
+    : undefined
+  const equipamentoSelecionado: Equipamento | null = encontrado
+    ? comManutencao(encontrado)
     : null
 
   /** Clicar de novo no mesmo equipamento desmarca. */

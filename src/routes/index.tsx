@@ -11,6 +11,8 @@ import SuggestWorkOut from "../pages/SuggestWorkOut";
 import Machines from "../pages/Machines";
 import GymMapPage from "../pages/GymMap";
 import TreinoPage from "../pages/Treino";
+import Desafios from "../pages/Desafios";
+import PerfilMorador from "../pages/PerfilMorador";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
@@ -48,6 +50,24 @@ function TreinoRoute() {
   return <TreinoPage treinoId={id} />;
 }
 
+function DesafiosRoute() {
+  const navigate = useNavigate();
+  return (
+    <Desafios
+      onExit={() => navigate("/")}
+      onAbrirPerfil={(moradorId) => navigate(`/desafios/${moradorId}`)}
+    />
+  );
+}
+
+function PerfilMoradorRoute() {
+  const navigate = useNavigate();
+  const { moradorId } = useParams();
+  return (
+    <PerfilMorador moradorId={moradorId} onVoltar={() => navigate("/desafios")} />
+  );
+}
+
 export default function Router() {
   return (
     <BrowserRouter>
@@ -58,6 +78,8 @@ export default function Router() {
           <Route path="/suggest" element={<SuggestWorkOutRoute />} />
           <Route path="/machines" element={<MachinesRoute />} />
           <Route path="/map" element={<GymMapRoute />} />
+          <Route path="/desafios" element={<DesafiosRoute />} />
+          <Route path="/desafios/:moradorId" element={<PerfilMoradorRoute />} />
         </Route>
 
         {/* Tela do celular, aberta só pelo QR code: fica fora da moldura

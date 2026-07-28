@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="w-full border-b border-white/10 bg-[#141414]  px-16 py-8 text-center">
+    <header className="w-full border-b border-white/10 bg-[#141414]  px-16 py-12 text-center">
       <h1 className="text-5xl font-extrabold uppercase tracking-wide text-[#BF9655]">
         Otimize Seu Treino
       </h1>
