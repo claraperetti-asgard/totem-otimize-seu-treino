@@ -35,12 +35,23 @@ export interface Morador {
   medalhas: Medalha[]
 }
 
+export type Dificuldade = 'facil' | 'media' | 'dificil'
+
 export interface Desafio {
   id: string
   criadorId: string
   titulo: string
   descricao: string
   participantes: number
+  /** quantos participantes o desafio quer alcançar */
+  metaParticipantes: number
+  dificuldade: Dificuldade
+  /** XP que o participante ganha ao concluir */
+  recompensaXp: number
+  /** medalha desbloqueada na conclusão */
+  recompensaMedalha: string
+  /** texto livre: "termina em 6 dias" */
+  prazo: string
   /** destaque "em alta" na lista */
   emAlta?: boolean
   /** texto livre: "há 2 horas", "ontem" */
@@ -203,6 +214,11 @@ export const moradores: Morador[] = [
 export const desafios: Desafio[] = [
   {
     id: 'treinar-5x',
+    metaParticipantes: 20,
+    dificuldade: 'media',
+    recompensaXp: 300,
+    recompensaMedalha: 'Guerreira Semanal',
+    prazo: 'Termina em 6 dias',
     criadorId: 'maria-201',
     titulo: 'Treinar 5x na semana',
     descricao:
@@ -213,6 +229,11 @@ export const desafios: Desafio[] = [
   },
   {
     id: 'clube-100kg',
+    metaParticipantes: 15,
+    dificuldade: 'dificil',
+    recompensaXp: 500,
+    recompensaMedalha: 'Clube dos 100kg',
+    prazo: 'Termina em 4 dias',
     criadorId: 'ricardo-1402',
     titulo: 'Clube dos 100kg (supino)',
     descricao:
@@ -222,6 +243,11 @@ export const desafios: Desafio[] = [
   },
   {
     id: '10-treinos-braco',
+    metaParticipantes: 12,
+    dificuldade: 'media',
+    recompensaXp: 250,
+    recompensaMedalha: 'Mestre do Braço',
+    prazo: 'Termina em 9 dias',
     criadorId: 'joao-paulo-112',
     titulo: 'Concluir 10 treinos de braço',
     descricao:
@@ -231,6 +257,11 @@ export const desafios: Desafio[] = [
   },
   {
     id: 'cardio-100km',
+    metaParticipantes: 25,
+    dificuldade: 'dificil',
+    recompensaXp: 450,
+    recompensaMedalha: 'Rainha do Cardio',
+    prazo: 'Termina em 12 dias',
     criadorId: 'helena-54',
     titulo: '100 km na esteira',
     descricao:
@@ -241,6 +272,11 @@ export const desafios: Desafio[] = [
   },
   {
     id: 'madrugada',
+    metaParticipantes: 10,
+    dificuldade: 'facil',
+    recompensaXp: 150,
+    recompensaMedalha: 'Madrugadora',
+    prazo: 'Termina em 15 dias',
     criadorId: 'carolina-305',
     titulo: 'Treinar antes das 7h',
     descricao: 'Dez treinos matinais para começar o dia com energia.',
@@ -272,4 +308,75 @@ export function iniciais(nome: string): string {
 /** Posição do morador no ranking (1 = primeiro). */
 export function posicaoNoRanking(id: string): number {
   return ranking.findIndex((m) => m.id === id) + 1
+}
+
+// ============================================================
+// GAMIFICAÇÃO: XP, NÍVEL E PATENTE
+// ============================================================
+
+/** XP necessário para subir cada nível. */
+export const XP_POR_NIVEL = 300
+
+/** Pontuação do morador: treino vale 10, medalha 50, dia de streak 5. */
+export function xpDoMorador(morador: Morador): number {
+  return (
+    morador.treinosMes * 10 +
+    morador.medalhas.length * 50 +
+    morador.streakDias * 5
+  )
+}
+
+const patentes = [
+  'Iniciante',
+  'Bronze',
+  'Prata',
+  'Ouro',
+  'Platina',
+  'Elite',
+  'Lenda',
+]
+
+export interface Progressao {
+  nivel: number
+  patente: string
+  xp: number
+  /** XP acumulado dentro do nível atual */
+  xpNoNivel: number
+  /** quanto falta para o próximo nível */
+  xpRestante: number
+  /** 0-100, para a barra */
+  progressoPct: number
+}
+
+export function progressaoDoMorador(morador: Morador): Progressao {
+  const xp = xpDoMorador(morador)
+  const nivel = Math.floor(xp / XP_POR_NIVEL) + 1
+  const xpNoNivel = xp % XP_POR_NIVEL
+  return {
+    nivel,
+    patente: patentes[Math.min(patentes.length - 1, Math.floor(nivel / 2))],
+    xp,
+    xpNoNivel,
+    xpRestante: XP_POR_NIVEL - xpNoNivel,
+    progressoPct: (xpNoNivel / XP_POR_NIVEL) * 100,
+  }
+}
+
+/** Números do topo da tela de Desafios. */
+export function resumoDaTemporada() {
+  return {
+    moradoresAtivos: moradores.length,
+    treinosNoMes: moradores.reduce((total, m) => total + m.treinosMes, 0),
+    desafiosAtivos: desafios.length,
+    medalhasEntregues: moradores.reduce(
+      (total, m) => total + m.medalhas.length,
+      0
+    ),
+  }
+}
+
+export const dificuldadeLabel: Record<Dificuldade, string> = {
+  facil: 'Fácil',
+  media: 'Média',
+  dificil: 'Difícil',
 }

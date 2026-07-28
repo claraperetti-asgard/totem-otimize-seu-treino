@@ -13,6 +13,7 @@ import Avatar from '../components/Avatar'
 import {
   buscarMorador,
   posicaoNoRanking,
+  progressaoDoMorador,
   type IconeMedalha,
   type Medalha,
   type NivelMedalha,
@@ -111,6 +112,7 @@ export default function PerfilMorador({
   }
 
   const posicao = posicaoNoRanking(morador.id)
+  const progressao = progressaoDoMorador(morador)
   const progressoSemana = Math.min(
     100,
     (morador.treinosSemana / morador.metaSemanal) * 100
@@ -146,6 +148,29 @@ export default function PerfilMorador({
         <p className="text-sm uppercase tracking-widest text-gray-400">
           {morador.apartamento}
         </p>
+
+        {/* Patente e barra de XP */}
+        <div className="mt-5 w-full max-w-md rounded-xl border border-[#BF9655]/40 bg-[#141414] p-4">
+          <div className="mb-2 flex items-center justify-between">
+            <span className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-[#BF9655]">
+              <Zap size={16} />
+              Nível {progressao.nivel} · {progressao.patente}
+            </span>
+            <span className="text-xs font-bold text-gray-400">
+              {progressao.xp} XP
+            </span>
+          </div>
+          <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
+            <div
+              className="h-full rounded-full bg-[#BF9655] transition-all duration-500"
+              style={{ width: `${progressao.progressoPct}%` }}
+            />
+          </div>
+          <p className="mt-2 text-center text-[10px] uppercase tracking-widest text-gray-500">
+            Faltam {progressao.xpRestante} XP para o nível{' '}
+            {progressao.nivel + 1}
+          </p>
+        </div>
       </div>
 
       {/* Estatísticas */}
