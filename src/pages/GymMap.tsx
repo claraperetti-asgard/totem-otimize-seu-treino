@@ -53,7 +53,6 @@ export default function GymMapPage({ onExit }: GymMapPageProps) {
             imagemMaquina: selecionado.imagemMaquina,
             imagemExecucao: selecionado.imagemExecucao,
             tags: selecionado.categorias.map(categoriaLabel),
-            especificacoes: selecionado.especificacoes,
             localizacao: selecionado.localizacao,
           }}
           onFechar={() => setDetalheAberto(false)}

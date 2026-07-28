@@ -4,7 +4,7 @@ import ImagemComFallback from './ImagemComFallback'
 import GymSvg from './GymMap/GymSvg'
 import EquipmentMarker from './GymMap/EquipmentMarker'
 import planta from '../assets/planta.png'
-import type { Especificacao, Localizacao } from '../data/equipamentos'
+import type { Localizacao } from '../data/equipamentos'
 
 export interface EquipamentoInfo {
   nome: string
@@ -17,7 +17,6 @@ export interface EquipamentoInfo {
   imagemExecucao?: string
   /** categorias / grupos trabalhados */
   tags?: string[]
-  especificacoes?: Especificacao[]
   localizacao?: Localizacao
 }
 
@@ -131,30 +130,6 @@ export default function EquipamentoModal({
               </span>
             ))}
           </div>
-        )}
-
-        {/* Ficha técnica */}
-        {equipamento.especificacoes && equipamento.especificacoes.length > 0 && (
-          <>
-            <h3 className="mb-3 text-sm font-bold uppercase tracking-widest text-gray-400">
-              Ficha Técnica
-            </h3>
-            <dl className="mb-8 divide-y divide-white/5 rounded-xl border border-white/10 bg-[#0D0D0D]">
-              {equipamento.especificacoes.map((spec) => (
-                <div
-                  key={spec.label}
-                  className="flex items-baseline justify-between gap-4 px-4 py-2.5"
-                >
-                  <dt className="text-xs uppercase tracking-wide text-gray-500">
-                    {spec.label}
-                  </dt>
-                  <dd className="text-right text-sm text-gray-300">
-                    {spec.valor}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </>
         )}
 
         {/* Localização na academia */}

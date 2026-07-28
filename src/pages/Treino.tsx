@@ -335,7 +335,6 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
             imagemMaquina: exercicioTutorial.modelo.imagemMaquina,
             imagemExecucao: exercicioTutorial.modelo.imagemExecucao,
             tags: exercicioTutorial.modelo.categorias.map(categoriaLabel),
-            especificacoes: exercicioTutorial.modelo.especificacoes,
             localizacao: exercicioTutorial.localizacao,
           }}
           onFechar={() => setExercicioTutorial(null)}

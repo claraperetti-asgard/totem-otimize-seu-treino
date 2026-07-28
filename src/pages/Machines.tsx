@@ -143,7 +143,6 @@ export default function Machines({ onExit }: MachinesProps) {
             imagemMaquina: modeloDetalhe.imagemMaquina,
             imagemExecucao: modeloDetalhe.imagemExecucao,
             tags: modeloDetalhe.categorias.map(categoriaLabel),
-            especificacoes: modeloDetalhe.especificacoes,
             localizacao: unidadesDoDetalhe[0]?.localizacao,
           }}
           onFechar={() => setModeloDetalhe(null)}
