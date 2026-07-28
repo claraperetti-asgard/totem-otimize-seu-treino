@@ -240,11 +240,7 @@ export default function AutenticacaoModal({
               autoComplete="current-password"
             />
 
-            <p className="mb-6 text-xs text-gray-500">
-              O login ainda não está conectado a nenhum sistema — por enquanto
-              o formulário é apenas demonstrativo.
-            </p>
-
+        
             <button
               type="submit"
               className="mb-3 flex w-full items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
@@ -366,11 +362,6 @@ export default function AutenticacaoModal({
               </p>
             )}
 
-            <p className="mb-6 text-xs text-gray-500">
-              O cadastro ainda não é enviado para nenhum sistema — por enquanto
-              o formulário é apenas demonstrativo.
-            </p>
-
             <div className="flex gap-3">
               <button
                 type="button"
@@ -398,7 +389,7 @@ export default function AutenticacaoModal({
               Formulário preenchido
             </h3>
             <p className="mb-8 text-sm text-gray-400">
-              O acesso com conta ainda está em desenvolvimento. Com ele, seus
+              Com o login criado seus
               treinos concluídos, medalhas, XP e posição no ranking passam a ser
               salvos no seu perfil.
             </p>
