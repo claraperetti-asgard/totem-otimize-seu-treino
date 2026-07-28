@@ -1,0 +1,55 @@
+import { categorias, type CategoriaId } from '../../data/equipamentos'
+
+interface CategoryTabsProps {
+  /** `null` = nenhuma categoria filtrada (aba "Todas") */
+  categoriaAtiva: CategoriaId | null
+  onSelecionar: (categoria: CategoriaId | null) => void
+  /** adiciona a aba "Todas" no início */
+  incluirTodas?: boolean
+  /** contador opcional por categoria, exibido ao lado do rótulo */
+  contar?: (categoria: CategoriaId | null) => number
+}
+
+export default function CategoryTabs({
+  categoriaAtiva,
+  onSelecionar,
+  incluirTodas = false,
+  contar,
+}: CategoryTabsProps) {
+  const abas: { id: CategoriaId | null; label: string }[] = [
+    ...(incluirTodas ? [{ id: null, label: 'Todas' }] : []),
+    ...categorias,
+  ]
+
+  return (
+    <div className="mb-6 flex gap-3 overflow-x-auto pb-1">
+      {abas.map((aba) => {
+        const ativa = aba.id === categoriaAtiva
+        const total = contar?.(aba.id)
+        return (
+          <button
+            key={aba.id ?? 'todas'}
+            onClick={() => onSelecionar(aba.id)}
+            aria-pressed={ativa}
+            className={`flex shrink-0 items-center gap-2 rounded-xl border px-6 py-3 text-sm font-bold uppercase tracking-wide transition ${
+              ativa
+                ? 'border-[#BF9655] bg-[#BF9655] text-black'
+                : 'border-white/10 bg-[#141414] text-gray-300 hover:border-[#BF9655] hover:text-[#BF9655]'
+            }`}
+          >
+            {aba.label}
+            {total !== undefined && (
+              <span
+                className={`text-[10px] ${
+                  ativa ? 'text-black/60' : 'text-gray-500'
+                }`}
+              >
+                {total}
+              </span>
+            )}
+          </button>
+        )
+      })}
+    </div>
+  )
+}

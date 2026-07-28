@@ -1,0 +1,93 @@
+import { Dumbbell, Heart } from 'lucide-react'
+import {
+  descricaoStatus,
+  type Equipamento,
+  type StatusEquipamento,
+} from '../../data/equipamentos'
+
+const corStatus: Record<StatusEquipamento, string> = {
+  livre: 'text-emerald-400',
+  'em-uso': 'text-orange-400',
+  manutencao: 'text-red-400',
+}
+
+interface EquipmentCardProps {
+  equipamento: Equipamento
+  selecionado: boolean
+  favorito: boolean
+  onSelecionar: (id: string) => void
+  onAlternarFavorito: (id: string) => void
+}
+
+export default function EquipmentCard({
+  equipamento,
+  selecionado,
+  favorito,
+  onSelecionar,
+  onAlternarFavorito,
+}: EquipmentCardProps) {
+  const status = equipamento.status ?? 'livre'
+
+  return (
+    <button
+      onClick={() => onSelecionar(equipamento.id)}
+      aria-pressed={selecionado}
+      className={`flex w-full items-center gap-4 rounded-xl border p-4 text-left transition ${
+        selecionado
+          ? 'border-[#BF9655] bg-[#1F1B14]'
+          : 'border-white/10 bg-[#141414] hover:border-[#BF9655]/50'
+      }`}
+    >
+      <span
+        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg transition ${
+          selecionado
+            ? 'bg-[#BF9655] text-black'
+            : 'bg-[#0D0D0D] text-[#BF9655]/60'
+        }`}
+      >
+        <Dumbbell size={22} />
+      </span>
+
+      <span className="min-w-0 flex-1">
+        <span
+          className={`block truncate text-sm font-bold uppercase tracking-wide ${
+            selecionado ? 'text-[#BF9655]' : 'text-white'
+          }`}
+        >
+          {equipamento.nome}
+          <span className="ml-2 text-[10px] tracking-widest text-gray-500">
+            {equipamento.codigo}
+          </span>
+        </span>
+        <span className="mt-0.5 block text-xs uppercase tracking-wide text-gray-500">
+          {equipamento.localizacao.area} ·{' '}
+          <span className={corStatus[status]}>
+            {descricaoStatus(equipamento)}
+          </span>
+        </span>
+      </span>
+
+      <span
+        role="button"
+        tabIndex={0}
+        aria-label={
+          favorito ? 'Remover dos favoritos' : 'Adicionar aos favoritos'
+        }
+        onClick={(e) => {
+          e.stopPropagation()
+          onAlternarFavorito(equipamento.id)
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            e.stopPropagation()
+            onAlternarFavorito(equipamento.id)
+          }
+        }}
+        className="shrink-0 p-1 text-[#BF9655] transition hover:brightness-125"
+      >
+        <Heart size={20} fill={favorito ? '#BF9655' : 'none'} />
+      </span>
+    </button>
+  )
+}
