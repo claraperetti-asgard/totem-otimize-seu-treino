@@ -4,7 +4,12 @@ import ImagemComFallback from './ImagemComFallback'
 import GymSvg from './GymMap/GymSvg'
 import EquipmentMarker from './GymMap/EquipmentMarker'
 import planta from '../assets/planta.png'
-import type { Localizacao } from '../data/equipamentos'
+import {
+  categoriaLabel,
+  type CategoriaId,
+  type Localizacao,
+} from '../data/equipamentos'
+import { corDaCategoria, paleta } from '../theme/cores'
 
 export interface EquipamentoInfo {
   nome: string
@@ -15,8 +20,8 @@ export interface EquipamentoInfo {
   imagemMaquina?: string
   /** imagem da execução do movimento */
   imagemExecucao?: string
-  /** categorias / grupos trabalhados */
-  tags?: string[]
+  /** grupos trabalhados — cada um sai na cor fixa da categoria */
+  categorias?: CategoriaId[]
   localizacao?: Localizacao
 }
 
@@ -80,7 +85,7 @@ export default function EquipamentoModal({
               {equipamento.nome}
             </h2>
             {equipamento.subtitulo && (
-              <p className="mt-1 text-sm text-gray-400">
+              <p className={`mt-1 text-sm ${paleta.azul.texto}`}>
                 {equipamento.subtitulo}
               </p>
             )}
@@ -118,15 +123,15 @@ export default function EquipamentoModal({
           </p>
         )}
 
-        {/* Categorias */}
-        {equipamento.tags && equipamento.tags.length > 0 && (
+        {/* Categorias — mesma cor usada nas outras telas */}
+        {equipamento.categorias && equipamento.categorias.length > 0 && (
           <div className="mb-8 flex flex-wrap gap-2">
-            {equipamento.tags.map((tag) => (
+            {equipamento.categorias.map((categoria) => (
               <span
-                key={tag}
-                className="rounded-full bg-[#BF9655] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-black"
+                key={categoria}
+                className={`rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${corDaCategoria[categoria].borda} ${corDaCategoria[categoria].chip}`}
               >
-                {tag}
+                {categoriaLabel(categoria)}
               </span>
             ))}
           </div>
@@ -141,7 +146,9 @@ export default function EquipamentoModal({
           nome={equipamento.nome}
         />
         {equipamento.localizacao && (
-          <p className="mt-3 text-center text-xs font-bold uppercase tracking-widest text-[#BF9655]">
+          <p
+            className={`mt-3 text-center text-xs font-bold uppercase tracking-widest ${paleta.azul.texto}`}
+          >
             {equipamento.localizacao.area}
           </p>
         )}

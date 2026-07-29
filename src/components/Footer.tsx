@@ -2,7 +2,7 @@ import cimerian from '../assets/logo-cimerian.png'
 
 export default function Footer() {
   return (
-    <footer className="mt-auto w-full border-t border-white/10 bg-[#141414] px-16 py-8">
+    <footer className="mt-auto w-full border-t border-white/10 bg-[#16233A] px-16 py-8">
       <div className="flex flex-col items-center gap-3">
         <img
           src={cimerian}

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import ChamadoManutencaoModal from '../components/ChamadoManutencaoModal'
 import AutenticacaoModal from '../components/AutenticacaoModal'
 import BannerSlider from '../components/BannerSlider'
+import { cor } from '../theme/paletaAzul'
 import { paleta } from '../theme/cores'
 import sugestaoImg from '../assets/sugestao.png'
 import equipamentosImg from '../assets/equipamentos.png'
@@ -16,7 +17,7 @@ function Card({
   description,
   buttonLabel,
   imagem,
-  cor,
+  chip,
   onClick,
   className = '',
 }: {
@@ -24,8 +25,8 @@ function Card({
   title: string
   description: string
   buttonLabel: string
-  /** cor de destaque do ícone, vinda da paleta de apoio */
-  cor: { chip: string; texto: string }
+  /** classes do chip do ícone */
+  chip: string
   /** foto de fundo do card — sem ela, fica só o fundo escuro */
   imagem?: string
   onClick?: () => void
@@ -33,9 +34,10 @@ function Card({
 }) {
   return (
     <div
-      className={`relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#141414] py-12 px-8 ${className}`}
+      className={`relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 py-12 px-8 ${className}`}
+      style={{ backgroundColor: cor.cartaoEscuro }}
     >
-      {/* Foto de fundo + sombra por cima, para o texto continuar legível */}
+      {/* Foto preenchendo o card + sombra por cima, para o texto continuar legível */}
       {imagem && (
         <img
           src={imagem}
@@ -44,15 +46,14 @@ function Card({
           className="absolute inset-0 h-full w-full object-cover"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0B121C] via-[#0B121C]/60 to-[#0B121C]/40" />
 
       <div className="relative">
-        <div
-          className={`mb-8 inline-flex rounded-2xl p-4 drop-shadow-lg ${cor.chip}`}
+        <div className={`mb-8 inline-flex rounded-2xl p-4 ${chip}`}>{icon}</div>
+        <h3
+          className="mb-1 text-2xl font-bold uppercase tracking-wide drop-shadow-lg"
+          style={{ color: cor.creme }}
         >
-          {icon}
-        </div>
-        <h3 className="mb-1 text-2xl font-bold uppercase tracking-wide text-[#BF9655] drop-shadow-lg">
           {title}
         </h3>
         <p className="mb-12 text-lg leading-snug text-gray-300 drop-shadow-md">
@@ -61,7 +62,8 @@ function Card({
       </div>
       <button
         onClick={onClick}
-        className="relative w-full rounded-lg bg-[#BF9655] py-3 text-lg font-bold uppercase tracking-wide text-black transition hover:brightness-110"
+        className="relative w-full rounded-lg py-3 text-lg font-bold uppercase tracking-wide transition hover:brightness-110"
+        style={{ backgroundColor: cor.creme, color: cor.cartaoEscuro }}
       >
         {buttonLabel}
       </button>
@@ -75,8 +77,11 @@ export default function Home() {
   const [acessoAberto, setAcessoAberto] = useState(false)
 
   return (
-    <div className="w-full flex-1 bg-[#212120] px-16 pb-10 pt-10 text-white">
-      {/* o título "Otimize Seu Treino" vive no Header global */}
+    <div
+      className="w-full flex-1 px-14 pb-14 pt-10 text-white"
+      style={{ backgroundColor: cor.fundo }}
+    >
+      
 
       {/* Grid de cards */}
       <div className="mb-6 grid grid-cols-2 gap-4">
@@ -85,7 +90,7 @@ export default function Home() {
           title="Sugestão de Treino"
           description="Algoritmos inteligentes para o seu objetivo hoje."
           buttonLabel="Abrir Sugestão"
-          cor={paleta.verde}
+          chip={paleta.verde.chip}
           imagem={sugestaoImg}
           onClick={() => navigate('/suggest')}
         />
@@ -94,7 +99,7 @@ export default function Home() {
           title="Equipamentos"
           description="Aprenda a utilizar nosso equipamento premium."
           buttonLabel="Ver Tutorial"
-          cor={paleta.azul}
+          chip={paleta.azul.chip}
           imagem={equipamentosImg}
           onClick={() => navigate('/machines')}
         />
@@ -103,8 +108,7 @@ export default function Home() {
           title="Mapa da Academia"
           description="Localize as zonas de treino e amenities."
           buttonLabel="Ver Mapa"
-          cor={paleta.vermelho}
-          className="col-span-1"
+          chip={paleta.vermelho.chip}
           imagem={mapaImg}
           onClick={() => navigate('/map')}
         />
@@ -113,8 +117,7 @@ export default function Home() {
           title="Desafios"
           description="Ranking dos moradores e desafios da comunidade."
           buttonLabel="Ver Desafios"
-          cor={paleta.amarelo}
-          className="col-span-1"
+          chip={paleta.amarelo.chip}
           imagem={desafiosImg}
           onClick={() => navigate('/desafios')}
         />
@@ -128,19 +131,21 @@ export default function Home() {
       {/* CTA final */}
       <button
         onClick={() => setAcessoAberto(true)}
-        className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-sm font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+        className="flex w-full items-center justify-center gap-2 rounded-2xl py-5 text-sm font-extrabold uppercase tracking-[0.15em] transition hover:brightness-110"
+        style={{ backgroundColor: cor.creme, color: cor.tinta }}
       >
         Entrar / Registrar-se
       </button>
 
-{/* Chamado de manutenção: atalho fixo no canto inferior direito */}
+      {/* Chamado de manutenção: atalho fixo no canto inferior direito */}
       <button
         onClick={() => setChamadoAberto(true)}
         aria-label="Abrir chamado de manutenção"
         title="Abrir chamado de manutenção"
-        className="fixed bottom-40 right-8 z-40 flex h-16 w-16 items-center justify-center rounded-full border border-[#BF9655] bg-[#BF9655] text-black shadow-lg transition"
+        className="fixed bottom-40 right-8 z-40 flex h-16 w-16 items-center justify-center rounded-full shadow-[0_10px_30px_-10px_rgba(0,0,0,0.9)] ring-2 ring-[#6B7688] transition hover:brightness-110"
+        style={{ backgroundColor: cor.cartaoEscuro, color: cor.creme }}
       >
-        <Wrench size={30} />
+        <Wrench size={28} />
       </button>
 
       {chamadoAberto && (

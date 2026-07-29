@@ -10,7 +10,6 @@ import {
 } from 'lucide-react'
 import EquipamentoModal from '../components/EquipamentoModal'
 import ImagemComFallback from '../components/ImagemComFallback'
-import { categoriaLabel } from '../data/equipamentos'
 import { corDaCategoria, paleta } from '../theme/cores'
 import {
   buscarTreino,
@@ -379,7 +378,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
             descricao: exercicioTutorial.modelo.descricao,
             imagemMaquina: exercicioTutorial.modelo.imagemMaquina,
             imagemExecucao: exercicioTutorial.modelo.imagemExecucao,
-            tags: exercicioTutorial.modelo.categorias.map(categoriaLabel),
+            categorias: exercicioTutorial.modelo.categorias,
             localizacao: exercicioTutorial.localizacao,
           }}
           onFechar={() => setExercicioTutorial(null)}

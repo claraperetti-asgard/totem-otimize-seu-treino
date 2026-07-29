@@ -381,7 +381,7 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
             descricao: exercicioTutorial.modelo.descricao,
             imagemMaquina: exercicioTutorial.modelo.imagemMaquina,
             imagemExecucao: exercicioTutorial.modelo.imagemExecucao,
-            tags: exercicioTutorial.modelo.categorias.map(categoriaLabel),
+            categorias: exercicioTutorial.modelo.categorias,
             localizacao: exercicioTutorial.localizacao,
           }}
           onFechar={() => setExercicioTutorial(null)}

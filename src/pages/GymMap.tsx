@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ArrowLeft, Info } from 'lucide-react'
 import GymMap from '../components/GymMap/GymMap'
 import EquipamentoModal from '../components/EquipamentoModal'
-import { categoriaLabel, type Equipamento } from '../data/equipamentos'
+import type { Equipamento } from '../data/equipamentos'
 
 interface GymMapPageProps {
   onExit: () => void
@@ -52,7 +52,7 @@ export default function GymMapPage({ onExit }: GymMapPageProps) {
             descricao: selecionado.descricao,
             imagemMaquina: selecionado.imagemMaquina,
             imagemExecucao: selecionado.imagemExecucao,
-            tags: selecionado.categorias.map(categoriaLabel),
+            categorias: selecionado.categorias,
             localizacao: selecionado.localizacao,
           }}
           onFechar={() => setDetalheAberto(false)}
