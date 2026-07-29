@@ -12,6 +12,7 @@ import {
   type CategoriaId,
   type ModeloEquipamento,
 } from '../data/equipamentos'
+import { corDaCategoria, paleta } from '../theme/cores'
 
 interface MachinesProps {
   onExit: () => void
@@ -87,7 +88,9 @@ export default function Machines({ onExit }: MachinesProps) {
                   ajuste="contain"
                 />
                 <div className="mb-1 mt-4 flex items-center gap-2">
-                  <span className="rounded bg-[#0D0D0D] px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#BF9655]">
+                  <span
+                    className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest ${paleta.amarelo.chip}`}
+                  >
                     {maquina.codigo}
                   </span>
                   <span className="text-[10px] uppercase tracking-widest text-gray-500">
@@ -101,7 +104,7 @@ export default function Machines({ onExit }: MachinesProps) {
                   {maquina.categorias.map((categoria) => (
                     <span
                       key={categoria}
-                      className="rounded-full border border-[#BF9655]/40 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[#BF9655]"
+                      className={`rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${corDaCategoria[categoria].borda} ${corDaCategoria[categoria].chip}`}
                     >
                       {categoriaLabel(categoria)}
                     </span>
@@ -111,8 +114,8 @@ export default function Machines({ onExit }: MachinesProps) {
                   {maquina.descricao}
                 </p>
                 {unidades.length > 0 && (
-                  <p className="mb-4 flex items-center gap-1 text-xs text-gray-500">
-                    <MapPin size={14} />
+                  <p className="mb-4 flex items-center gap-1 text-xs text-sky-400/80">
+                    <MapPin size={14} className="text-sky-400" />
                     {unidades.length}{' '}
                     {unidades.length === 1 ? 'unidade' : 'unidades'} ·{' '}
                     {unidades[0].localizacao.area}

@@ -1,4 +1,5 @@
 import { categorias, type CategoriaId } from '../../data/equipamentos'
+import { corDaCategoria } from '../../theme/cores'
 
 interface CategoryTabsProps {
   /** `null` = nenhuma categoria filtrada (aba "Todas") */
@@ -26,6 +27,8 @@ export default function CategoryTabs({
       {abas.map((aba) => {
         const ativa = aba.id === categoriaAtiva
         const total = contar?.(aba.id)
+        // cada grupo muscular tem uma cor fixa no sistema
+        const cor = aba.id ? corDaCategoria[aba.id] : null
         return (
           <button
             key={aba.id ?? 'todas'}
@@ -37,6 +40,14 @@ export default function CategoryTabs({
                 : 'border-white/10 bg-[#141414] text-gray-300 hover:border-[#BF9655] hover:text-[#BF9655]'
             }`}
           >
+            {/* pontinho da cor do grupo, para achar a aba de relance */}
+            {cor && (
+              <span
+                className={`h-2 w-2 rounded-full ${
+                  ativa ? 'bg-black/40' : cor.barra
+                }`}
+              />
+            )}
             {aba.label}
             {total !== undefined && (
               <span

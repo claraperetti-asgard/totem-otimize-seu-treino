@@ -11,6 +11,7 @@ import {
 import EquipamentoModal from '../components/EquipamentoModal'
 import ImagemComFallback from '../components/ImagemComFallback'
 import { categoriaLabel } from '../data/equipamentos'
+import { corDaCategoria, paleta } from '../theme/cores'
 import {
   buscarTreino,
   resolverExercicios,
@@ -63,10 +64,19 @@ function dividirSeries(texto: string): { series: string; repeticoes: string } {
 }
 
 /** Linha rotulada dos cards de exercício (SÉRIES, REPETIÇÕES, DESCANSO). */
-function LinhaInfo({ label, valor }: { label: string; valor: string }) {
+function LinhaInfo({
+  label,
+  valor,
+  cor = "text-gray-500",
+}: {
+  label: string
+  valor: string
+  /** cor do rótulo, para diferenciar as linhas de relance */
+  cor?: string
+}) {
   return (
     <div className="rounded-lg bg-[#1f1f1f] px-4 py-2.5">
-      <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500">
+      <p className={`text-[11px] font-bold uppercase tracking-widest ${cor}`}>
         {label}
       </p>
       <p className="text-base font-bold text-white">{valor}</p>
@@ -84,11 +94,18 @@ function formatarTempo(segundos: number): string {
   return h > 0 ? `${dd(h)}:${dd(m)}:${dd(s)}` : `${dd(m)}:${dd(s)}`
 }
 
-function BarraProgresso({ porcentagem }: { porcentagem: number }) {
+function BarraProgresso({
+  porcentagem,
+  cor = "bg-[#BF9655]",
+}: {
+  porcentagem: number
+  /** classe de cor sólida da barra */
+  cor?: string
+}) {
   return (
     <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
       <div
-        className="h-full rounded-full bg-[#BF9655] transition-all duration-500"
+        className={`h-full rounded-full transition-all duration-500 ${cor}`}
         style={{ width: `${Math.min(100, Math.max(0, porcentagem))}%` }}
       />
     </div>
@@ -164,13 +181,17 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
           <h1 className="text-3xl font-extrabold uppercase leading-tight text-[#BF9655]">
             {treino.nome}
           </h1>
-          <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-gray-400">
-            <span className="flex items-center gap-1">
-              <Clock size={14} />
+          <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
+            <span
+              className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.azul.chip}`}
+            >
+              <Clock size={13} />
               {treino.duracaoMin} min
             </span>
-            <span className="flex items-center gap-1">
-              <Dumbbell size={14} />
+            <span
+              className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.verde.chip}`}
+            >
+              <Dumbbell size={13} />
               {exercicios.length} exercícios
             </span>
           </div>
@@ -195,7 +216,11 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
         </p>
 
         <div className="mb-4 flex flex-wrap items-center gap-3">
-          <span className="text-5xl font-extrabold tabular-nums tracking-tight text-white">
+          <span
+            className={`text-5xl font-extrabold tabular-nums tracking-tight transition-colors ${
+              rodando ? "text-amber-400" : "text-white"
+            }`}
+          >
             {formatarTempo(segundos)}
           </span>
           <span className="text-sm text-gray-400">
@@ -205,7 +230,9 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
           <div className="ml-auto flex gap-2">
             <button
               onClick={() => setRodando((r) => !r)}
-              className="flex items-center gap-2 rounded-lg bg-[#BF9655] px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
+              className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110 ${
+                rodando ? "bg-amber-500" : "bg-emerald-500"
+              }`}
             >
               {rodando ? <Pause size={16} /> : <Play size={16} />}
               {rodando ? 'Pausar' : 'Iniciar'}
@@ -243,9 +270,9 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
 
         <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest">
           <span className="text-gray-400">Progresso do tempo</span>
-          <span className="text-[#BF9655]">{Math.round(progressoTempo)}%</span>
+          <span className="text-amber-400">{Math.round(progressoTempo)}%</span>
         </div>
-        <BarraProgresso porcentagem={progressoTempo} />
+        <BarraProgresso porcentagem={progressoTempo} cor="bg-amber-500" />
       </section>
 
       {/* ---------------- PROGRESSO DOS EXERCÍCIOS ---------------- */}
@@ -253,12 +280,15 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
         <h2 className="text-lg font-extrabold uppercase tracking-wide text-white">
           Progresso
         </h2>
-        <span className="text-lg font-extrabold text-[#BF9655]">
+        <span className="text-lg font-extrabold text-emerald-400">
           {Math.round(progressoExercicios)}%
         </span>
       </div>
       <div className="mb-6">
-        <BarraProgresso porcentagem={progressoExercicios} />
+        <BarraProgresso
+          porcentagem={progressoExercicios}
+          cor="bg-emerald-500"
+        />
       </div>
 
       {/* ---------------- EXERCÍCIOS ---------------- */}
@@ -270,7 +300,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
             <div
               key={ex.chave}
               className={`flex flex-col overflow-hidden rounded-2xl border bg-[#141414] transition ${
-                concluido ? 'border-[#BF9655]' : 'border-white/10'
+                concluido ? 'border-emerald-500' : 'border-white/10'
               }`}
             >
               {/* Foto do equipamento com a etiqueta do modelo */}
@@ -281,7 +311,10 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
                   className="h-56 w-full rounded-none border-0"
                   ajuste="contain"
                 />
-                <span className="absolute left-3 top-3 rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-bold text-black shadow-sm">
+                <span className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-bold text-black shadow-sm">
+                  <span
+                    className={`h-2 w-2 rounded-full ${corDaCategoria[ex.modelo.categorias[0]].barra}`}
+                  />
                   {ex.modelo.nome}
                 </span>
               </div>
@@ -297,8 +330,8 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
                     aria-pressed={concluido}
                     className={`flex shrink-0 items-center gap-2 rounded-lg border px-4 py-2 text-sm font-bold transition ${
                       concluido
-                        ? 'border-[#BF9655] bg-[#BF9655] text-black'
-                        : 'border-white/10 bg-[#1f1f1f] text-gray-200 hover:border-[#BF9655] hover:text-[#BF9655]'
+                        ? 'border-emerald-500 bg-emerald-500 text-black'
+                        : 'border-white/10 bg-[#1f1f1f] text-gray-200 hover:border-emerald-500 hover:text-emerald-400'
                     }`}
                   >
                     {concluido && <Check size={16} />}
@@ -307,9 +340,21 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
                 </div>
 
                 <div className="mb-4 flex flex-col gap-2">
-                  <LinhaInfo label="Séries" valor={series} />
-                  <LinhaInfo label="Repetições" valor={repeticoes} />
-                  <LinhaInfo label="Descanso" valor={ex.descanso} />
+                  <LinhaInfo
+                    label="Séries"
+                    valor={series}
+                    cor="text-sky-400"
+                  />
+                  <LinhaInfo
+                    label="Repetições"
+                    valor={repeticoes}
+                    cor="text-emerald-400"
+                  />
+                  <LinhaInfo
+                    label="Descanso"
+                    valor={ex.descanso}
+                    cor="text-orange-400"
+                  />
                 </div>
 
                 <button

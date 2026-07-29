@@ -38,18 +38,23 @@ function CardEstatistica({
   valor,
   destaque,
   icone,
+  cor = "text-[#BF9655]",
 }: {
   label: string
   valor: string
   destaque?: string
   icone?: React.ReactNode
+  /** cor do número, vinda da paleta de apoio */
+  cor?: string
 }) {
   return (
     <div className="rounded-xl border border-white/10 bg-[#141414] p-5 text-center">
       <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-gray-500">
         {label}
       </p>
-      <p className="flex items-center justify-center gap-2 text-3xl font-extrabold text-[#BF9655]">
+      <p
+        className={`flex items-center justify-center gap-2 text-3xl font-extrabold ${cor}`}
+      >
         {valor}
         {icone}
       </p>
@@ -152,7 +157,7 @@ export default function PerfilMorador({
         {/* Patente e barra de XP */}
         <div className="mt-5 w-full max-w-md rounded-xl border border-[#BF9655]/40 bg-[#141414] p-4">
           <div className="mb-2 flex items-center justify-between">
-            <span className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-[#BF9655]">
+            <span className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wide text-amber-400">
               <Zap size={16} />
               Nível {progressao.nivel} · {progressao.patente}
             </span>
@@ -162,7 +167,7 @@ export default function PerfilMorador({
           </div>
           <div className="h-2.5 w-full overflow-hidden rounded-full bg-white/10">
             <div
-              className="h-full rounded-full bg-[#BF9655] transition-all duration-500"
+              className="h-full rounded-full bg-amber-500 transition-all duration-500"
               style={{ width: `${progressao.progressoPct}%` }}
             />
           </div>
@@ -180,15 +185,18 @@ export default function PerfilMorador({
           valor={`${morador.streakDias}`}
           destaque="dias seguidos"
           icone={<Flame size={22} />}
+          cor="text-orange-400"
         />
         <CardEstatistica
           label="Treinos na semana"
           valor={`${morador.treinosSemana} / ${morador.metaSemanal}`}
+          cor="text-emerald-400"
         />
         <CardEstatistica
           label="Total de medalhas"
           valor={`${morador.medalhas.length}`}
           icone={<Medal size={22} />}
+          cor="text-amber-400"
         />
       </div>
 
@@ -196,11 +204,13 @@ export default function PerfilMorador({
       <div className="mb-10 rounded-xl border border-white/10 bg-[#141414] p-5">
         <div className="mb-3 flex items-center justify-between text-xs font-bold uppercase tracking-widest">
           <span className="text-gray-400">Meta da semana</span>
-          <span className="text-[#BF9655]">{Math.round(progressoSemana)}%</span>
+          <span className="text-emerald-400">
+            {Math.round(progressoSemana)}%
+          </span>
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
           <div
-            className="h-full rounded-full bg-[#BF9655] transition-all duration-500"
+            className="h-full rounded-full bg-emerald-500 transition-all duration-500"
             style={{ width: `${progressoSemana}%` }}
           />
         </div>
@@ -267,7 +277,7 @@ export default function PerfilMorador({
 
         <span
           className={`flex items-center gap-1 text-lg font-extrabold ${
-            subiu ? 'text-[#BF9655]' : 'text-red-400'
+            subiu ? 'text-emerald-400' : 'text-rose-400'
           }`}
         >
           {subiu ? <TrendingUp size={20} /> : <TrendingDown size={20} />}

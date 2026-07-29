@@ -8,7 +8,14 @@ import {
 const corStatus: Record<StatusEquipamento, string> = {
   livre: 'text-emerald-400',
   'em-uso': 'text-orange-400',
-  manutencao: 'text-red-400',
+  manutencao: 'text-rose-400',
+}
+
+/** bolinha de status ao lado do nome */
+const pontoStatus: Record<StatusEquipamento, string> = {
+  livre: 'bg-emerald-400',
+  'em-uso': 'bg-orange-400',
+  manutencao: 'bg-rose-400',
 }
 
 interface EquipmentCardProps {
@@ -59,8 +66,14 @@ export default function EquipmentCard({
             {equipamento.codigo}
           </span>
         </span>
-        <span className="mt-0.5 block text-xs uppercase tracking-wide text-gray-500">
-          {equipamento.localizacao.area} ·{' '}
+        <span className="mt-0.5 flex items-center gap-1.5 text-xs uppercase tracking-wide text-gray-500">
+          <span
+            className={`h-1.5 w-1.5 shrink-0 rounded-full ${pontoStatus[status]}`}
+          />
+          <span className="text-sky-400/80">
+            {equipamento.localizacao.area}
+          </span>
+          ·
           <span className={corStatus[status]}>
             {descricaoStatus(equipamento)}
           </span>

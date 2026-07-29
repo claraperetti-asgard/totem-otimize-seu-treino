@@ -16,6 +16,7 @@ import homemImg from '../assets/homem.png'
 import mulherImg from '../assets/mulher.png'
 import treinoImg from '../assets/treino.png'
 import { categoriaLabel } from '../data/equipamentos'
+import { corDaCategoria, paleta, type Cor } from '../theme/cores'
  import {
   nivelStyles,
   objetivoLabel,
@@ -41,11 +42,37 @@ const generos: {
   { id: 'mulher', label: 'Mulher', imagem: mulherImg, foco: 'center 20%' },
 ]
 
-const objetivos: { id: Objetivo; label: string; icon: React.ReactNode }[] = [
-  { id: 'perda-peso', label: 'Perda de Peso', icon: <Flame size={20} /> },
-  { id: 'ganho-massa', label: 'Ganho de Massa', icon: <Dumbbell size={20} /> },
-  { id: 'forca-bruta', label: 'Força Bruta', icon: <Zap size={20} /> },
-  { id: 'resistencia', label: 'Resistência', icon: <Timer size={20} /> },
+const objetivos: {
+  id: Objetivo
+  label: string
+  icon: React.ReactNode
+  /** cor de apoio do objetivo, usada no ícone e na seleção */
+  cor: Cor
+}[] = [
+  {
+    id: 'perda-peso',
+    label: 'Perda de Peso',
+    icon: <Flame size={20} />,
+    cor: paleta.laranja,
+  },
+  {
+    id: 'ganho-massa',
+    label: 'Ganho de Massa',
+    icon: <Dumbbell size={20} />,
+    cor: paleta.verde,
+  },
+  {
+    id: 'forca-bruta',
+    label: 'Força Bruta',
+    icon: <Zap size={20} />,
+    cor: paleta.roxo,
+  },
+  {
+    id: 'resistencia',
+    label: 'Resistência',
+    icon: <Timer size={20} />,
+    cor: paleta.azul,
+  },
 ]
 
 /** Junta o item do treino com o modelo do catálogo e a unidade instalada. */
@@ -174,11 +201,16 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                   onClick={() => setObjetivoSelecionado(obj.id)}
                   className={`flex items-center gap-3 rounded-xl border bg-[#141414] px-5 py-4 text-sm font-bold uppercase tracking-wide transition ${
                     selecionado
-                      ? 'border-[#BF9655] text-[#BF9655]'
-                      : 'border-white/10 text-white'
+                      ? `${obj.cor.borda} ${obj.cor.texto}`
+                      : 'border-white/10 text-white hover:border-white/25'
                   }`}
                 >
-                  {obj.icon}
+                  {/* cada objetivo tem sua cor, para bater o olho e reconhecer */}
+                  <span
+                    className={`flex h-10 w-10 items-center justify-center rounded-lg ${obj.cor.chip}`}
+                  >
+                    {obj.icon}
+                  </span>
                   {obj.label}
                 </button>
               )
@@ -214,13 +246,17 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                   <h3 className="mb-1 text-lg font-extrabold uppercase text-[#BF9655]">
                     {treino.nome}
                   </h3>
-                  <div className="mb-4 flex items-center gap-3 text-xs text-gray-400">
-                    <span className="flex items-center gap-1">
-                      <Clock size={14} />
+                  <div className="mb-4 flex items-center gap-2 text-xs">
+                    <span
+                      className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.azul.chip}`}
+                    >
+                      <Clock size={13} />
                       {treino.duracaoMin} min
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Dumbbell size={14} />
+                    <span
+                      className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.verde.chip}`}
+                    >
+                      <Dumbbell size={13} />
                       {treino.exercicios.length} exercícios
                     </span>
                   </div>
@@ -256,12 +292,16 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                 <p className="mb-3 text-sm leading-relaxed text-gray-400">
                   {treinoSelecionado.descricao}
                 </p>
-                <div className="flex items-center gap-3 text-xs text-gray-400">
-                  <span className="flex items-center gap-1">
+                <div className="flex items-center gap-2 text-xs">
+                  <span
+                    className={`flex items-center gap-1 rounded-full px-3 py-1 font-bold ${paleta.azul.chip}`}
+                  >
                     <Clock size={14} />
                     {treinoSelecionado.duracaoMin} min
                   </span>
-                  <span className="flex items-center gap-1">
+                  <span
+                    className={`flex items-center gap-1 rounded-full px-3 py-1 font-bold ${paleta.verde.chip}`}
+                  >
                     <Dumbbell size={14} />
                     {exercicios.length} exercícios
                   </span>
@@ -303,8 +343,19 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                 <p className="mb-2 text-xs uppercase tracking-widest text-gray-500">
                   {ex.modelo.nome}
                 </p>
-                <p className="mb-1 text-sm text-gray-300">{ex.series}</p>
-                <p className="mb-4 flex-1 text-sm text-gray-400">
+                {/* grupo trabalhado, na cor fixa da categoria */}
+                <div className="mb-3 flex flex-wrap gap-1.5">
+                  {ex.modelo.categorias.map((categoria) => (
+                    <span
+                      key={categoria}
+                      className={`rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${corDaCategoria[categoria].borda} ${corDaCategoria[categoria].chip}`}
+                    >
+                      {categoriaLabel(categoria)}
+                    </span>
+                  ))}
+                </div>
+                <p className="mb-1 text-sm font-bold text-white">{ex.series}</p>
+                <p className="mb-4 flex-1 text-sm text-orange-400/80">
                   Descanso: {ex.descanso}
                 </p>
                 <button

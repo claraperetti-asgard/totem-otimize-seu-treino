@@ -24,6 +24,7 @@ import {
   type Dificuldade,
   type Morador,
 } from '../data/comunidade'
+import { paleta } from '../theme/cores'
 
 const estiloDificuldade: Record<Dificuldade, string> = {
   facil: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400',
@@ -46,16 +47,16 @@ const estiloPodio = [
     avatar: 112,
   },
   {
-    anel: 'border-gray-300',
-    texto: 'text-gray-300',
+    anel: 'border-sky-200',
+    texto: 'text-sky-200',
     degrau: 'h-32',
     ordem: 'order-1',
     peso: 'basis-[31%]',
     avatar: 88,
   },
   {
-    anel: 'border-orange-700',
-    texto: 'text-orange-500',
+    anel: 'border-orange-600',
+    texto: 'text-orange-400',
     degrau: 'h-24',
     ordem: 'order-3',
     peso: 'basis-[31%]',
@@ -67,18 +68,25 @@ function Estatistica({
   icone,
   valor,
   label,
+  cor,
 }: {
   icone: React.ReactNode
   valor: string
   label: string
+  /** par de classes vindo da paleta de apoio */
+  cor: { chip: string; texto: string }
 }) {
   return (
     <div className="flex items-center gap-3 rounded-xl border border-white/10 bg-[#141414] px-5 py-4">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#BF9655]/15 text-[#BF9655]">
+      <span
+        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg ${cor.chip}`}
+      >
         {icone}
       </span>
       <span>
-        <span className="block text-2xl font-extrabold leading-none text-[#BF9655]">
+        <span
+          className={`block text-2xl font-extrabold leading-none ${cor.texto}`}
+        >
           {valor}
         </span>
         <span className="text-[10px] uppercase tracking-widest text-gray-500">
@@ -220,21 +228,25 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
           icone={<Users size={20} />}
           valor={String(resumo.moradoresAtivos)}
           label="Moradores ativos"
+          cor={paleta.azul}
         />
         <Estatistica
           icone={<TrendingUp size={20} />}
           valor={String(resumo.treinosNoMes)}
           label="Treinos no mês"
+          cor={paleta.verde}
         />
         <Estatistica
           icone={<Swords size={20} />}
           valor={String(resumo.desafiosAtivos)}
           label="Desafios ativos"
+          cor={paleta.vermelho}
         />
         <Estatistica
           icone={<Medal size={20} />}
           valor={String(resumo.medalhasEntregues)}
           label="Medalhas entregues"
+          cor={paleta.amarelo}
         />
       </div>
 
@@ -296,11 +308,11 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
                       <span className="truncate text-sm font-bold uppercase tracking-wide text-white">
                         {morador.nome} — {morador.apartamento}
                       </span>
-                      <span className="rounded-full border border-[#BF9655]/40 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-[#BF9655]">
+                      <span className="rounded-full border border-sky-500/40 bg-sky-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-sky-400">
                         Nv {progressao.nivel} · {progressao.patente}
                       </span>
-                      <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                        <Flame size={11} className="text-[#BF9655]" />
+                      <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-orange-400/80">
+                        <Flame size={11} className="text-orange-400" />
                         {morador.streakDias} dias
                       </span>
                     </span>
@@ -314,9 +326,12 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
                     </span>
 
                     <span className="mt-1 block text-[10px] uppercase tracking-widest text-gray-600">
-                      Faltam {faltaParaSubir}{' '}
-                      {faltaParaSubir === 1 ? 'treino' : 'treinos'} para subir
-                      de posição
+                      Faltam{' '}
+                      <span className="font-bold text-emerald-400">
+                        {faltaParaSubir}{' '}
+                        {faltaParaSubir === 1 ? 'treino' : 'treinos'}
+                      </span>{' '}
+                      para subir de posição
                     </span>
                   </span>
 
@@ -349,7 +364,7 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
           </h2>
         </div>
         {participando.length > 0 && (
-          <span className="flex items-center gap-2 rounded-full border border-[#BF9655] bg-[#BF9655]/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#BF9655]">
+          <span className="flex items-center gap-2 rounded-full border border-emerald-500/50 bg-emerald-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-emerald-400">
             <Sparkles size={14} />
             {participando.length}{' '}
             {participando.length === 1 ? 'desafio aceito' : 'desafios aceitos'}{' '}
@@ -373,7 +388,7 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
               key={desafio.id}
               className={`flex flex-col rounded-xl border bg-[#141414] p-5 transition ${
                 inscrito
-                  ? 'border-[#BF9655] shadow-[0_0_24px_-12px_#BF9655]'
+                  ? 'border-emerald-500 shadow-[0_0_24px_-12px_#10b981]'
                   : 'border-white/10'
               }`}
             >
@@ -394,7 +409,7 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
                   </p>
                 </div>
                 {desafio.emAlta && (
-                  <span className="flex shrink-0 animate-pulse items-center gap-1 rounded bg-[#BF9655] px-2 py-1 text-[10px] font-bold uppercase text-black">
+                  <span className="flex shrink-0 items-center gap-1 rounded-full border border-rose-500/40 bg-rose-500/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-rose-400">
                     <Flame size={12} />
                     Em alta
                   </span>
@@ -409,10 +424,10 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
                 >
                   {dificuldadeLabel[desafio.dificuldade]}
                 </span>
-                <span className="flex items-center gap-1 rounded-full border border-[#BF9655]/40 bg-[#BF9655]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#BF9655]">
+                <span className="flex items-center gap-1 rounded-full border border-amber-500/40 bg-amber-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-amber-400">
                   <Zap size={11} />+{desafio.recompensaXp} XP
                 </span>
-                <span className="flex items-center gap-1 rounded-full border border-white/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                <span className="flex items-center gap-1 rounded-full border border-sky-500/40 bg-sky-500/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-sky-400">
                   <Medal size={11} />
                   {desafio.recompensaMedalha}
                 </span>
@@ -432,13 +447,13 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
                     <Target size={12} />
                     Meta da turma
                   </span>
-                  <span className="text-[#BF9655]">
+                  <span className="text-emerald-400">
                     {totalParticipantes}/{desafio.metaParticipantes}
                   </span>
                 </div>
                 <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
                   <div
-                    className="h-full rounded-full bg-[#BF9655] transition-all duration-500"
+                    className="h-full rounded-full bg-emerald-500 transition-all duration-500"
                     style={{ width: `${progressoMeta}%` }}
                   />
                 </div>
@@ -454,7 +469,7 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
                   aria-pressed={inscrito}
                   className={`flex items-center gap-2 rounded-lg px-6 py-2.5 text-sm font-bold uppercase tracking-wide transition ${
                     inscrito
-                      ? 'border border-[#BF9655] text-[#BF9655] hover:brightness-125'
+                      ? 'border border-emerald-500 bg-emerald-500/10 text-emerald-400 hover:brightness-125'
                       : 'bg-[#BF9655] text-black hover:brightness-110'
                   }`}
                 >

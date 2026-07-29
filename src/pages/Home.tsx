@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import ChamadoManutencaoModal from '../components/ChamadoManutencaoModal'
 import AutenticacaoModal from '../components/AutenticacaoModal'
 import BannerSlider from '../components/BannerSlider'
+import { paleta } from '../theme/cores'
 import sugestaoImg from '../assets/sugestao.png'
 import equipamentosImg from '../assets/equipamentos.png'
 import mapaImg from '../assets/mapa.jpg'
@@ -15,6 +16,7 @@ function Card({
   description,
   buttonLabel,
   imagem,
+  cor,
   onClick,
   className = '',
 }: {
@@ -22,6 +24,8 @@ function Card({
   title: string
   description: string
   buttonLabel: string
+  /** cor de destaque do ícone, vinda da paleta de apoio */
+  cor: { chip: string; texto: string }
   /** foto de fundo do card — sem ela, fica só o fundo escuro */
   imagem?: string
   onClick?: () => void
@@ -43,7 +47,11 @@ function Card({
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/40" />
 
       <div className="relative">
-        <div className="mb-8 text-[#BF9655] drop-shadow-lg">{icon}</div>
+        <div
+          className={`mb-8 inline-flex rounded-2xl p-4 drop-shadow-lg ${cor.chip}`}
+        >
+          {icon}
+        </div>
         <h3 className="mb-1 text-2xl font-bold uppercase tracking-wide text-[#BF9655] drop-shadow-lg">
           {title}
         </h3>
@@ -73,35 +81,39 @@ export default function Home() {
       {/* Grid de cards */}
       <div className="mb-6 grid grid-cols-2 gap-4">
         <Card
-          icon={<Dumbbell size={80} />}
+          icon={<Dumbbell size={56} />}
           title="Sugestão de Treino"
           description="Algoritmos inteligentes para o seu objetivo hoje."
           buttonLabel="Abrir Sugestão"
+          cor={paleta.verde}
           imagem={sugestaoImg}
           onClick={() => navigate('/suggest')}
         />
         <Card
-          icon={<Boxes size={80} />}
+          icon={<Boxes size={56} />}
           title="Equipamentos"
           description="Aprenda a utilizar nosso equipamento premium."
           buttonLabel="Ver Tutorial"
+          cor={paleta.azul}
           imagem={equipamentosImg}
           onClick={() => navigate('/machines')}
         />
         <Card
-          icon={<MapPin size={80} />}
+          icon={<MapPin size={56} />}
           title="Mapa da Academia"
           description="Localize as zonas de treino e amenities."
           buttonLabel="Ver Mapa"
+          cor={paleta.vermelho}
           className="col-span-1"
           imagem={mapaImg}
           onClick={() => navigate('/map')}
         />
         <Card
-          icon={<Trophy size={80} />}
+          icon={<Trophy size={56} />}
           title="Desafios"
           description="Ranking dos moradores e desafios da comunidade."
           buttonLabel="Ver Desafios"
+          cor={paleta.amarelo}
           className="col-span-1"
           imagem={desafiosImg}
           onClick={() => navigate('/desafios')}
