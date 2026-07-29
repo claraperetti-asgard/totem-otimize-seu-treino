@@ -23,12 +23,12 @@ export default function ImagemComFallback({
   iconeTamanho = 40,
 }: ImagemComFallbackProps) {
   const [erro, setErro] = useState(false)
-  const base = `border border-white/10 bg-[#fcfbfa] ${className}`
+  const base = `border border-[#24334D] bg-[#fcfbfa] ${className}`
 
   if (!src || erro) {
     return (
       <div
-        className={`flex items-center justify-center text-[#BF9655]/40 ${base}`}
+        className={`flex items-center justify-center text-[#FAF7F1]/40 ${base}`}
       >
         <Dumbbell size={iconeTamanho} />
       </div>

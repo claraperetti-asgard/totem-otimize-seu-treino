@@ -2,7 +2,7 @@ import { MapPin } from 'lucide-react'
 import type { StatusEquipamento } from '../../data/equipamentos'
 
 /** Cor de destaque do equipamento selecionado (dourado do sistema). */
-export const COR_SELECAO = '#BF9655'
+export const COR_SELECAO = '#2F6FEC'
 
 interface EquipmentMarkerProps {
   /** posição do equipamento na planta, em % (0-100) */
@@ -40,7 +40,7 @@ export default function EquipmentMarker({
       style={{ left: `${x}%`, top: `${y}%` }}
     >
       {selecionado && (
-        <span className="whitespace-nowrap rounded-full bg-[#BF9655] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-black shadow-lg">
+        <span className="whitespace-nowrap rounded-full bg-[#FAF7F1] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-black shadow-lg">
           {nome}
         </span>
       )}
@@ -78,7 +78,7 @@ function Pino({
       strokeWidth={2}
       className="transition-all duration-200"
       color={COR_SELECAO}
-      fill={selecionado ? COR_SELECAO : '#0D0D0D'}
+      fill={selecionado ? COR_SELECAO : '#101A2B'}
       style={{
         opacity: emManutencao && !selecionado ? 0.35 : 1,
         filter: selecionado

@@ -97,7 +97,7 @@ export default function BannerSlider({
         onPointerCancel={aoSoltar}
         // pan-y mantém a rolagem vertical da página funcionando
         style={{ touchAction: 'pan-y' }}
-        className={`w-full cursor-grab overflow-hidden rounded-2xl border border-white/10 active:cursor-grabbing ${altura}`}
+        className={`w-full cursor-grab overflow-hidden rounded-2xl border border-[#24334D] active:cursor-grabbing ${altura}`}
       >
         <div
           onTransitionEnd={aoTerminarTransicao}
@@ -133,7 +133,7 @@ export default function BannerSlider({
               aria-current={posicao === atual}
               className={`h-2 rounded-full transition-all duration-300 ${
                 posicao === atual
-                  ? 'w-8 bg-[#BF9655]'
+                  ? 'w-8 bg-[#FAF7F1]'
                   : 'w-2 bg-white/25 hover:bg-white/50'
               }`}
             />

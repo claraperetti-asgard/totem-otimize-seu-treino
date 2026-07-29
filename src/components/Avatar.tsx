@@ -19,8 +19,8 @@ export default function Avatar({
       style={{ width: tamanho, height: tamanho, fontSize: tamanho * 0.38 }}
       className={`flex shrink-0 items-center justify-center rounded-full border font-extrabold uppercase tracking-wide ${
         destacado
-          ? 'border-[#BF9655] bg-[#BF9655] text-black'
-          : 'border-white/10 bg-[#1f1f1f] text-[#BF9655]'
+          ? 'border-[#FAF7F1] bg-[#FAF7F1] text-black'
+          : 'border-[#24334D] bg-[#1E2B44] text-[#FAF7F1]'
       }`}
     >
       {iniciais(nome)}

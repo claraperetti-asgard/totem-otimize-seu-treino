@@ -12,7 +12,7 @@ import {
   type CategoriaId,
   type ModeloEquipamento,
 } from '../data/equipamentos'
-import { corDaCategoria, paleta } from '../theme/cores'
+import { corDaCategoria, pilulaNeutra } from '../theme/cores'
 
 interface MachinesProps {
   onExit: () => void
@@ -33,16 +33,16 @@ export default function Machines({ onExit }: MachinesProps) {
     : []
 
   return (
-    <div className="w-full flex-1 bg-[#212120] px-16 pb-10 pt-10 text-white">
+    <div className="w-full flex-1 bg-[#26303b] px-16 pb-10 pt-10 text-white">
       {/* Header */}
       <header className="mb-8 flex items-center gap-4">
         <button
           onClick={onExit}
-          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#141414] text-[#BF9655]"
+          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#16233A] text-[#FAF7F1]"
         >
           <ArrowLeft size={24} />
         </button>
-        <h1 className="text-3xl font-extrabold uppercase tracking-wide text-[#BF9655]">
+        <h1 className="text-3xl font-extrabold uppercase tracking-wide text-[#FAF7F1]">
           Equipamentos
         </h1>
       </header>
@@ -70,7 +70,7 @@ export default function Machines({ onExit }: MachinesProps) {
       </p>
 
       {equipamentos.length === 0 ? (
-        <div className="rounded-2xl border border-white/10 bg-[#141414] p-10 text-center text-gray-400">
+        <div className="rounded-2xl border border-[#24334D] bg-[#16233A] p-10 text-center text-gray-400">
           Nenhum equipamento cadastrado para esta categoria.
         </div>
       ) : (
@@ -80,7 +80,7 @@ export default function Machines({ onExit }: MachinesProps) {
             return (
               <div
                 key={maquina.codigo}
-                className="flex flex-col rounded-xl border border-white/10 bg-[#141414] p-4"
+                className="flex flex-col rounded-xl border border-[#24334D] bg-[#16233A] p-4"
               >
                 <ImagemComFallback
                   src={maquina.imagemMaquina}
@@ -89,7 +89,7 @@ export default function Machines({ onExit }: MachinesProps) {
                 />
                 <div className="mb-1 mt-4 flex items-center gap-2">
                   <span
-                    className={`rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest ${paleta.amarelo.chip}`}
+                    className="rounded bg-white/5 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#C4CEDC]"
                   >
                     {maquina.codigo}
                   </span>
@@ -97,15 +97,18 @@ export default function Machines({ onExit }: MachinesProps) {
                     {linhaLabel(maquina.linha)}
                   </span>
                 </div>
-                <h3 className="mb-2 text-lg font-extrabold uppercase leading-tight text-[#BF9655]">
+                <h3 className="mb-2 text-lg font-extrabold uppercase leading-tight text-[#FAF7F1]">
                   {maquina.nome}
                 </h3>
                 <div className="mb-3 flex flex-wrap gap-1.5">
                   {maquina.categorias.map((categoria) => (
                     <span
                       key={categoria}
-                      className={`rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${corDaCategoria[categoria].borda} ${corDaCategoria[categoria].chip}`}
+                      className={`flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${pilulaNeutra}`}
                     >
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${corDaCategoria[categoria].barra}`}
+                      />
                       {categoriaLabel(categoria)}
                     </span>
                   ))}
@@ -114,8 +117,8 @@ export default function Machines({ onExit }: MachinesProps) {
                   {maquina.descricao}
                 </p>
                 {unidades.length > 0 && (
-                  <p className="mb-4 flex items-center gap-1 text-xs text-sky-400/80">
-                    <MapPin size={14} className="text-sky-400" />
+                  <p className="mb-4 flex items-center gap-1 text-xs text-gray-500">
+                    <MapPin size={14} className="text-sky-300/70" />
                     {unidades.length}{' '}
                     {unidades.length === 1 ? 'unidade' : 'unidades'} ·{' '}
                     {unidades[0].localizacao.area}
@@ -123,7 +126,7 @@ export default function Machines({ onExit }: MachinesProps) {
                 )}
                 <button
                   onClick={() => setModeloDetalhe(maquina)}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#BF9655] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#FAF7F1] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
                 >
                   Detalhes
                   <Info size={16} />

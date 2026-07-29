@@ -13,15 +13,15 @@ export default function GymMapPage({ onExit }: GymMapPageProps) {
   const [detalheAberto, setDetalheAberto] = useState(false)
 
   return (
-    <div className="w-full flex-1 bg-[#212120] px-16 pb-10 pt-10 text-white">
+    <div className="w-full flex-1 bg-[#26303b] px-16 pb-10 pt-10 text-white">
       <header className="mb-8 flex items-center gap-4">
         <button
           onClick={onExit}
-          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#141414] text-[#BF9655]"
+          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#16233A] text-[#FAF7F1]"
         >
           <ArrowLeft size={24} />
         </button>
-        <h1 className="text-3xl font-extrabold uppercase tracking-wide text-[#BF9655]">
+        <h1 className="text-3xl font-extrabold uppercase tracking-wide text-[#FAF7F1]">
           Mapa da Unidade
         </h1>
       </header>
@@ -37,7 +37,7 @@ export default function GymMapPage({ onExit }: GymMapPageProps) {
       {selecionado && (
         <button
           onClick={() => setDetalheAberto(true)}
-          className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+          className="mt-8 flex w-full items-center justify-center gap-2 rounded-xl bg-[#FAF7F1] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
         >
           Ver detalhes de {selecionado.nome}
           <Info size={18} />

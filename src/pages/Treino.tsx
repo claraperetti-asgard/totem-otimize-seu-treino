@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 import EquipamentoModal from '../components/EquipamentoModal'
 import ImagemComFallback from '../components/ImagemComFallback'
-import { corDaCategoria, paleta } from '../theme/cores'
+import { corDaCategoria, paleta, pilulaNeutra } from '../theme/cores'
 import {
   buscarTreino,
   resolverExercicios,
@@ -74,7 +74,7 @@ function LinhaInfo({
   cor?: string
 }) {
   return (
-    <div className="rounded-lg bg-[#1f1f1f] px-4 py-2.5">
+    <div className="rounded-lg bg-[#1E2B44] px-4 py-2.5">
       <p className={`text-[11px] font-bold uppercase tracking-widest ${cor}`}>
         {label}
       </p>
@@ -95,7 +95,7 @@ function formatarTempo(segundos: number): string {
 
 function BarraProgresso({
   porcentagem,
-  cor = "bg-[#BF9655]",
+  cor = "bg-[#FAF7F1]",
 }: {
   porcentagem: number
   /** classe de cor sólida da barra */
@@ -138,8 +138,8 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
 
   if (!treino) {
     return (
-      <div className="min-h-screen w-full bg-[#212120] px-5 pb-10 pt-8 text-white">
-        <div className="rounded-2xl border border-white/10 bg-[#141414] p-10 text-center text-gray-400">
+      <div className="min-h-screen w-full bg-[#26303b] px-5 pb-10 pt-8 text-white">
+        <div className="rounded-2xl border border-[#24334D] bg-[#16233A] p-10 text-center text-gray-400">
           Treino não encontrado. Escaneie o QR code do totem para abrir o seu
           treino.
         </div>
@@ -170,27 +170,27 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#212120] px-5 pb-10 pt-8 text-white">
+    <div className="min-h-screen w-full bg-[#26303b] px-5 pb-10 pt-8 text-white">
       {/* ---------------- CABEÇALHO ---------------- */}
       <header className="mb-6 flex items-start gap-3">
         <div className="min-w-0 flex-1">
-          <span className="mb-2 inline-block rounded bg-[#BF9655] px-3 py-1 text-[10px] font-bold uppercase text-black">
+          <span className="mb-2 inline-block rounded bg-[#FAF7F1] px-3 py-1 text-[10px] font-bold uppercase text-black">
             Level: {treino.nivelDificuldade}
           </span>
-          <h1 className="text-3xl font-extrabold uppercase leading-tight text-[#BF9655]">
+          <h1 className="text-3xl font-extrabold uppercase leading-tight text-[#FAF7F1]">
             {treino.nome}
           </h1>
           <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
             <span
-              className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.azul.chip}`}
+              className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${pilulaNeutra}`}
             >
-              <Clock size={13} />
+              <Clock size={13} className={paleta.azul.texto} />
               {treino.duracaoMin} min
             </span>
             <span
-              className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.verde.chip}`}
+              className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${pilulaNeutra}`}
             >
-              <Dumbbell size={13} />
+              <Dumbbell size={13} className={paleta.verde.texto} />
               {exercicios.length} exercícios
             </span>
           </div>
@@ -198,7 +198,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
 
         <button
           onClick={resetarProgresso}
-          className="shrink-0 rounded-lg border border-white/10 bg-[#141414] px-3 py-2 text-[11px] font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#BF9655] hover:text-[#BF9655]"
+          className="shrink-0 rounded-lg border border-[#24334D] bg-[#16233A] px-3 py-2 text-[11px] font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#FAF7F1] hover:text-[#FAF7F1]"
         >
           Resetar progresso
         </button>
@@ -209,7 +209,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
       </p>
 
       {/* ---------------- TEMPO DE TREINO ---------------- */}
-      <section className="mb-6 rounded-2xl border border-white/10 bg-[#141414] p-5">
+      <section className="mb-6 rounded-2xl border border-[#24334D] bg-[#16233A] p-5">
         <p className="mb-2 text-xs font-bold uppercase tracking-widest text-gray-400">
           Tempo de treino
         </p>
@@ -217,7 +217,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
         <div className="mb-4 flex flex-wrap items-center gap-3">
           <span
             className={`text-5xl font-extrabold tabular-nums tracking-tight transition-colors ${
-              rodando ? "text-amber-400" : "text-white"
+              rodando ? "text-amber-300" : "text-white"
             }`}
           >
             {formatarTempo(segundos)}
@@ -230,7 +230,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
             <button
               onClick={() => setRodando((r) => !r)}
               className={`flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110 ${
-                rodando ? "bg-amber-500" : "bg-emerald-500"
+                rodando ? "bg-amber-400" : "bg-emerald-400"
               }`}
             >
               {rodando ? <Pause size={16} /> : <Play size={16} />}
@@ -241,7 +241,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
                 setSegundos(0)
                 setRodando(false)
               }}
-              className="flex items-center gap-2 rounded-lg border border-white/10 bg-[#1f1f1f] px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#BF9655] hover:text-[#BF9655]"
+              className="flex items-center gap-2 rounded-lg border border-[#24334D] bg-[#1E2B44] px-5 py-2.5 text-sm font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#FAF7F1] hover:text-[#FAF7F1]"
             >
               <RotateCcw size={16} />
               Resetar
@@ -260,7 +260,7 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
           value={alvo}
           onChange={(e) => setAlvo(e.target.value)}
           placeholder={`${treino.duracaoMin}min`}
-          className="w-full rounded-lg border border-white/10 bg-[#0D0D0D] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#BF9655] focus:outline-none"
+          className="w-full rounded-lg border border-[#24334D] bg-[#101A2B] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#FAF7F1] focus:outline-none"
         />
         <p className="mb-4 mt-2 text-xs text-gray-500">
           Se preencher, o temporizador mostra a contagem regressiva e o
@@ -269,9 +269,9 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
 
         <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-widest">
           <span className="text-gray-400">Progresso do tempo</span>
-          <span className="text-amber-400">{Math.round(progressoTempo)}%</span>
+          <span className="text-[#C4CEDC]">{Math.round(progressoTempo)}%</span>
         </div>
-        <BarraProgresso porcentagem={progressoTempo} cor="bg-amber-500" />
+        <BarraProgresso porcentagem={progressoTempo} cor="bg-amber-400/80" />
       </section>
 
       {/* ---------------- PROGRESSO DOS EXERCÍCIOS ---------------- */}
@@ -279,14 +279,14 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
         <h2 className="text-lg font-extrabold uppercase tracking-wide text-white">
           Progresso
         </h2>
-        <span className="text-lg font-extrabold text-emerald-400">
+        <span className="text-lg font-extrabold text-emerald-300/80">
           {Math.round(progressoExercicios)}%
         </span>
       </div>
       <div className="mb-6">
         <BarraProgresso
           porcentagem={progressoExercicios}
-          cor="bg-emerald-500"
+          cor="bg-emerald-400/80"
         />
       </div>
 
@@ -298,8 +298,8 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
           return (
             <div
               key={ex.chave}
-              className={`flex flex-col overflow-hidden rounded-2xl border bg-[#141414] transition ${
-                concluido ? 'border-emerald-500' : 'border-white/10'
+              className={`flex flex-col overflow-hidden rounded-2xl border bg-[#16233A] transition ${
+                concluido ? 'border-emerald-400/70' : 'border-[#24334D]'
               }`}
             >
               {/* Foto do equipamento com a etiqueta do modelo */}
@@ -329,8 +329,8 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
                     aria-pressed={concluido}
                     className={`flex shrink-0 items-center gap-2 rounded-lg border px-4 py-2 text-sm font-bold transition ${
                       concluido
-                        ? 'border-emerald-500 bg-emerald-500 text-black'
-                        : 'border-white/10 bg-[#1f1f1f] text-gray-200 hover:border-emerald-500 hover:text-emerald-400'
+                        ? 'border-emerald-400 bg-emerald-400 text-[#1B2436]'
+                        : 'border-[#24334D] bg-[#1E2B44] text-gray-200 hover:border-emerald-400/70 hover:text-emerald-300'
                     }`}
                   >
                     {concluido && <Check size={16} />}
@@ -342,23 +342,23 @@ export default function TreinoPage({ treinoId }: TreinoPageProps) {
                   <LinhaInfo
                     label="Séries"
                     valor={series}
-                    cor="text-sky-400"
+                    cor="text-gray-500"
                   />
                   <LinhaInfo
                     label="Repetições"
                     valor={repeticoes}
-                    cor="text-emerald-400"
+                    cor="text-gray-500"
                   />
                   <LinhaInfo
                     label="Descanso"
                     valor={ex.descanso}
-                    cor="text-orange-400"
+                    cor="text-gray-500"
                   />
                 </div>
 
                 <button
                   onClick={() => setExercicioTutorial(ex)}
-                  className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-[#BF9655] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
+                  className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-[#FAF7F1] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
                 >
                   Tutorial
                   <PlayCircle size={16} />

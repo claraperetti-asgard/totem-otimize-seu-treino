@@ -535,7 +535,7 @@ export default function Desafios({ onExit, onAbrirPerfil }: DesafiosProps) {
 
               <h3
                 className="mb-2 text-lg font-extrabold uppercase leading-tight"
-                style={{ color: cor.azulTitulo }}
+                style={{ color: cor.creme }}
               >
                 {desafio.titulo}
               </h3>

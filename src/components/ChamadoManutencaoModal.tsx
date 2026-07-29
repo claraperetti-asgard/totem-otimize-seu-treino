@@ -56,20 +56,20 @@ export default function ChamadoManutencaoModal({
       aria-modal="true"
       aria-label="Abrir chamado de manutenção"
       onClick={onFechar}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-10 py-10 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0B121C]/85 px-10 py-10 backdrop-blur-sm"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="max-h-full w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-[#141414] p-8"
+        className="max-h-full w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#24334D] bg-[#16233A] p-8"
       >
         {/* Cabeçalho */}
         <div className="mb-6 flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#BF9655] text-black">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#FAF7F1] text-black">
               <Wrench size={22} />
             </span>
             <div>
-              <h2 className="text-2xl font-extrabold uppercase tracking-wide text-[#BF9655]">
+              <h2 className="text-2xl font-extrabold uppercase tracking-wide text-[#FAF7F1]">
                 Chamado de Manutenção
               </h2>
               <p className="text-sm text-gray-400">
@@ -80,7 +80,7 @@ export default function ChamadoManutencaoModal({
           <button
             onClick={onFechar}
             aria-label="Fechar"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black text-[#BF9655] transition hover:brightness-125"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#101A2B] text-[#FAF7F1] transition hover:brightness-125"
           >
             <X size={24} />
           </button>
@@ -88,18 +88,18 @@ export default function ChamadoManutencaoModal({
 
         {enviado ? (
           <div className="text-center">
-            <CheckCircle2 size={56} className="mx-auto mb-4 text-[#BF9655]" />
-            <h3 className="mb-2 text-xl font-extrabold uppercase text-[#BF9655]">
+            <CheckCircle2 size={56} className="mx-auto mb-4 text-[#FAF7F1]" />
+            <h3 className="mb-2 text-xl font-extrabold uppercase text-[#FAF7F1]">
               Chamado registrado
             </h3>
             <p className="mb-8 text-sm text-gray-400">
               {equipamentoEscolhido?.nome} já aparece como{' '}
-              <span className="font-bold text-[#BF9655]">EM MANUTENÇÃO</span> no
+              <span className="font-bold text-[#FAF7F1]">EM MANUTENÇÃO</span> no
               mapa da academia.
             </p>
             <button
               onClick={onFechar}
-              className="w-full rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+              className="w-full rounded-xl bg-[#FAF7F1] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
             >
               Fechar
             </button>
@@ -118,7 +118,7 @@ export default function ChamadoManutencaoModal({
               required
               value={equipamentoId}
               onChange={(e) => setEquipamentoId(e.target.value)}
-              className="mb-5 w-full rounded-lg border border-white/10 bg-[#0D0D0D] px-4 py-3 text-base text-white focus:border-[#BF9655] focus:outline-none"
+              className="mb-5 w-full rounded-lg border border-[#24334D] bg-[#101A2B] px-4 py-3 text-base text-white focus:border-[#FAF7F1] focus:outline-none"
             >
               <option value="">Selecione o equipamento</option>
               {equipamentos.map((equipamento) => (
@@ -145,8 +145,8 @@ export default function ChamadoManutencaoModal({
                     aria-pressed={selecionado}
                     className={`rounded-lg border px-4 py-3 text-left text-sm font-bold transition ${
                       selecionado
-                        ? 'border-[#BF9655] bg-[#1a1712] text-[#BF9655]'
-                        : 'border-white/10 bg-[#0D0D0D] text-gray-300 hover:border-[#BF9655]/50'
+                        ? 'border-[#FAF7F1] bg-[#1E2B44] text-[#FAF7F1]'
+                        : 'border-[#24334D] bg-[#101A2B] text-gray-300 hover:border-[#FAF7F1]/50'
                     }`}
                   >
                     {opcao.label}
@@ -168,7 +168,7 @@ export default function ChamadoManutencaoModal({
               value={descricao}
               onChange={(e) => setDescricao(e.target.value)}
               placeholder="Ex.: o cabo da polia esquerda está escapando do trilho durante o movimento."
-              className="mb-5 w-full resize-none rounded-lg border border-white/10 bg-[#0D0D0D] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#BF9655] focus:outline-none"
+              className="mb-5 w-full resize-none rounded-lg border border-[#24334D] bg-[#101A2B] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#FAF7F1] focus:outline-none"
             />
 
             {/* Autor */}
@@ -183,7 +183,7 @@ export default function ChamadoManutencaoModal({
               value={autor}
               onChange={(e) => setAutor(e.target.value)}
               placeholder="Ex.: Maria — AP 201"
-              className="mb-6 w-full rounded-lg border border-white/10 bg-[#0D0D0D] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#BF9655] focus:outline-none"
+              className="mb-6 w-full rounded-lg border border-[#24334D] bg-[#101A2B] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#FAF7F1] focus:outline-none"
             />
 
             <p className="mb-6 text-xs text-gray-500">
@@ -195,14 +195,14 @@ export default function ChamadoManutencaoModal({
               <button
                 type="button"
                 onClick={onFechar}
-                className="flex-1 rounded-xl border border-white/10 bg-[#1f1f1f] py-4 text-base font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#BF9655] hover:text-[#BF9655]"
+                className="flex-1 rounded-xl border border-[#24334D] bg-[#1E2B44] py-4 text-base font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#FAF7F1] hover:text-[#FAF7F1]"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={!equipamentoId}
-                className="flex flex-[2] items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110 disabled:opacity-40"
+                className="flex flex-[2] items-center justify-center gap-2 rounded-xl bg-[#FAF7F1] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110 disabled:opacity-40"
               >
                 Abrir chamado
                 <Send size={18} />

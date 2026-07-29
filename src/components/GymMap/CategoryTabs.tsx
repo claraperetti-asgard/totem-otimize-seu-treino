@@ -36,8 +36,8 @@ export default function CategoryTabs({
             aria-pressed={ativa}
             className={`flex shrink-0 items-center gap-2 rounded-xl border px-6 py-3 text-sm font-bold uppercase tracking-wide transition ${
               ativa
-                ? 'border-[#BF9655] bg-[#BF9655] text-black'
-                : 'border-white/10 bg-[#141414] text-gray-300 hover:border-[#BF9655] hover:text-[#BF9655]'
+                ? 'border-[#FAF7F1] bg-[#FAF7F1] text-black'
+                : 'border-[#24334D] bg-[#16233A] text-gray-300 hover:border-[#FAF7F1] hover:text-[#FAF7F1]'
             }`}
           >
             {/* pontinho da cor do grupo, para achar a aba de relance */}

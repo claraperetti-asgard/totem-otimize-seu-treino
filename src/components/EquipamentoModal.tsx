@@ -9,7 +9,7 @@ import {
   type CategoriaId,
   type Localizacao,
 } from '../data/equipamentos'
-import { corDaCategoria, paleta } from '../theme/cores'
+import { corDaCategoria, pilulaNeutra } from '../theme/cores'
 
 export interface EquipamentoInfo {
   nome: string
@@ -72,20 +72,20 @@ export default function EquipamentoModal({
       aria-modal="true"
       aria-label={equipamento.nome}
       onClick={onFechar}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#020a17]/80 px-10 py-10 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0B121C]/85 px-10 py-10 backdrop-blur-sm"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="max-h-full w-full max-w-3xl overflow-y-auto rounded-2xl border border-white/10 bg-[#141414] p-8"
+        className="max-h-full w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#24334D] bg-[#16233A] p-8"
       >
         {/* Cabeçalho */}
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
-            <h2 className="text-3xl font-extrabold uppercase tracking-wide text-[#BF9655]">
+            <h2 className="text-3xl font-extrabold uppercase tracking-wide text-[#FAF7F1]">
               {equipamento.nome}
             </h2>
             {equipamento.subtitulo && (
-              <p className={`mt-1 text-sm ${paleta.azul.texto}`}>
+              <p className="mt-1 text-sm text-gray-400">
                 {equipamento.subtitulo}
               </p>
             )}
@@ -93,7 +93,7 @@ export default function EquipamentoModal({
           <button
             onClick={onFechar}
             aria-label="Fechar"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#020a17] text-[#BF9655] transition hover:brightness-125"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#020a17] text-[#FAF7F1] transition hover:brightness-125"
           >
             <X size={24} />
           </button>
@@ -129,8 +129,11 @@ export default function EquipamentoModal({
             {equipamento.categorias.map((categoria) => (
               <span
                 key={categoria}
-                className={`rounded-full border px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${corDaCategoria[categoria].borda} ${corDaCategoria[categoria].chip}`}
+                className={`flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${pilulaNeutra}`}
               >
+                <span
+                  className={`h-2 w-2 rounded-full ${corDaCategoria[categoria].barra}`}
+                />
                 {categoriaLabel(categoria)}
               </span>
             ))}
@@ -147,7 +150,7 @@ export default function EquipamentoModal({
         />
         {equipamento.localizacao && (
           <p
-            className={`mt-3 text-center text-xs font-bold uppercase tracking-widest ${paleta.azul.texto}`}
+            className="mt-3 text-center text-xs font-bold uppercase tracking-widest text-[#C4CEDC]"
           >
             {equipamento.localizacao.area}
           </p>
@@ -155,7 +158,7 @@ export default function EquipamentoModal({
 
         <button
           onClick={onFechar}
-          className="mt-8 w-full rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+          className="mt-8 w-full rounded-xl bg-[#FAF7F1] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
         >
           Fechar
         </button>

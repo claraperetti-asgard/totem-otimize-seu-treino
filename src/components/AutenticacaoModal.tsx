@@ -53,7 +53,7 @@ function Campo({
         autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-white/10 bg-[#0D0D0D] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#BF9655] focus:outline-none"
+        className="w-full rounded-lg border border-[#24334D] bg-[#101A2B] px-4 py-3 text-base text-white placeholder:text-gray-600 focus:border-[#FAF7F1] focus:outline-none"
       />
     </div>
   )
@@ -133,11 +133,11 @@ export default function AutenticacaoModal({
       aria-modal="true"
       aria-label="Entrar ou criar conta"
       onClick={onFechar}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-10 py-10 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#0B121C]/85 px-10 py-10 backdrop-blur-sm"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`max-h-full w-full ${largura} overflow-y-auto rounded-2xl border border-white/10 bg-[#141414] p-8`}
+        className={`max-h-full w-full ${largura} overflow-y-auto rounded-2xl border border-[#24334D] bg-[#16233A] p-8`}
       >
         {/* Cabeçalho */}
         <div className="mb-6 flex items-start justify-between gap-4">
@@ -146,13 +146,13 @@ export default function AutenticacaoModal({
               <button
                 onClick={voltarParaEscolha}
                 aria-label="Voltar"
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black text-[#BF9655] transition hover:brightness-125"
+                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#101A2B] text-[#FAF7F1] transition hover:brightness-125"
               >
                 <ArrowLeft size={22} />
               </button>
             )}
             <div>
-              <h2 className="text-2xl font-extrabold uppercase tracking-wide text-[#BF9655]">
+              <h2 className="text-2xl font-extrabold uppercase tracking-wide text-[#FAF7F1]">
                 {etapa === 'login'
                   ? 'Entrar'
                   : etapa === 'cadastro'
@@ -175,7 +175,7 @@ export default function AutenticacaoModal({
           <button
             onClick={onFechar}
             aria-label="Fechar"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-black text-[#BF9655] transition hover:brightness-125"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#101A2B] text-[#FAF7F1] transition hover:brightness-125"
           >
             <X size={24} />
           </button>
@@ -186,7 +186,7 @@ export default function AutenticacaoModal({
           <div className="flex flex-col gap-3">
             <button
               onClick={() => setEtapa('login')}
-              className="flex items-center gap-4 rounded-xl bg-[#BF9655] px-5 py-4 text-left text-black transition hover:brightness-110"
+              className="flex items-center gap-4 rounded-xl bg-[#FAF7F1] px-5 py-4 text-left text-black transition hover:brightness-110"
             >
               <LogIn size={24} />
               <span>
@@ -201,7 +201,7 @@ export default function AutenticacaoModal({
 
             <button
               onClick={() => setEtapa('cadastro')}
-              className="flex items-center gap-4 rounded-xl border border-white/10 bg-[#1f1f1f] px-5 py-4 text-left text-gray-200 transition hover:border-[#BF9655] hover:text-[#BF9655]"
+              className="flex items-center gap-4 rounded-xl border border-[#24334D] bg-[#1E2B44] px-5 py-4 text-left text-gray-200 transition hover:border-[#FAF7F1] hover:text-[#FAF7F1]"
             >
               <UserPlus size={24} />
               <span>
@@ -243,7 +243,7 @@ export default function AutenticacaoModal({
         
             <button
               type="submit"
-              className="mb-3 flex w-full items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+              className="mb-3 flex w-full items-center justify-center gap-2 rounded-xl bg-[#FAF7F1] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
             >
               Entrar
               <LogIn size={18} />
@@ -251,7 +251,7 @@ export default function AutenticacaoModal({
             <button
               type="button"
               onClick={() => setEtapa('cadastro')}
-              className="w-full text-center text-xs font-bold uppercase tracking-widest text-gray-500 transition hover:text-[#BF9655]"
+              className="w-full text-center text-xs font-bold uppercase tracking-widest text-gray-500 transition hover:text-[#FAF7F1]"
             >
               Não tenho conta — quero me cadastrar
             </button>
@@ -314,7 +314,7 @@ export default function AutenticacaoModal({
                   id="objetivo"
                   value={objetivo}
                   onChange={(e) => setObjetivo(e.target.value)}
-                  className="w-full rounded-lg border border-white/10 bg-[#0D0D0D] px-4 py-3 text-base text-white focus:border-[#BF9655] focus:outline-none"
+                  className="w-full rounded-lg border border-[#24334D] bg-[#101A2B] px-4 py-3 text-base text-white focus:border-[#FAF7F1] focus:outline-none"
                 >
                   {objetivos.map((opcao) => (
                     <option key={opcao} value={opcao}>
@@ -351,7 +351,7 @@ export default function AutenticacaoModal({
                 type="checkbox"
                 checked={aceite}
                 onChange={(e) => setAceite(e.target.checked)}
-                className="mt-0.5 h-5 w-5 shrink-0 accent-[#BF9655]"
+                className="mt-0.5 h-5 w-5 shrink-0 accent-[#FAF7F1]"
               />
               Li e aceito o regulamento de uso da academia do condomínio.
             </label>
@@ -366,13 +366,13 @@ export default function AutenticacaoModal({
               <button
                 type="button"
                 onClick={voltarParaEscolha}
-                className="flex-1 rounded-xl border border-white/10 bg-[#1f1f1f] py-4 text-base font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#BF9655] hover:text-[#BF9655]"
+                className="flex-1 rounded-xl border border-[#24334D] bg-[#1E2B44] py-4 text-base font-bold uppercase tracking-wide text-gray-300 transition hover:border-[#FAF7F1] hover:text-[#FAF7F1]"
               >
                 Voltar
               </button>
               <button
                 type="submit"
-                className="flex flex-[2] items-center justify-center gap-2 rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+                className="flex flex-[2] items-center justify-center gap-2 rounded-xl bg-[#FAF7F1] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
               >
                 Criar conta
                 <UserPlus size={18} />
@@ -384,8 +384,8 @@ export default function AutenticacaoModal({
         {/* ---------------- SUCESSO ---------------- */}
         {etapa === 'sucesso' && (
           <div className="text-center">
-            <CheckCircle2 size={56} className="mx-auto mb-4 text-[#BF9655]" />
-            <h3 className="mb-2 text-xl font-extrabold uppercase text-[#BF9655]">
+            <CheckCircle2 size={56} className="mx-auto mb-4 text-[#FAF7F1]" />
+            <h3 className="mb-2 text-xl font-extrabold uppercase text-[#FAF7F1]">
               Formulário preenchido
             </h3>
             <p className="mb-8 text-sm text-gray-400">
@@ -395,7 +395,7 @@ export default function AutenticacaoModal({
             </p>
             <button
               onClick={onFechar}
-              className="w-full rounded-xl bg-[#BF9655] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
+              className="w-full rounded-xl bg-[#FAF7F1] py-4 text-base font-extrabold uppercase tracking-wide text-black transition hover:brightness-110"
             >
               Fechar
             </button>

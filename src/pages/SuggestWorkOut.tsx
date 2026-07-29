@@ -14,9 +14,9 @@ import ImagemComFallback from '../components/ImagemComFallback'
 import { urlDoTreino } from '../data/treinos'
 import homemImg from '../assets/homem.png'
 import mulherImg from '../assets/mulher.png'
-import treinoImg from '../assets/treino.png'
+import treinoImg from '../assets/treino.jpg'
 import { categoriaLabel } from '../data/equipamentos'
-import { corDaCategoria, paleta, type Cor } from '../theme/cores'
+import { corDaCategoria, paleta, pilulaNeutra, type Cor } from '../theme/cores'
  import {
   nivelStyles,
   objetivoLabel,
@@ -111,21 +111,21 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
 
 
   return (
-    <div className="w-full flex-1 bg-[#212120] px-16 pb-10 pt-10 text-white">
+    <div className="w-full flex-1 bg-[#26303b] px-16 pb-10 pt-10 text-white">
       {/* Header comum a todos os passos */}
       <header className="mb-8 flex items-center gap-4">
         <button
           onClick={handleVoltar}
-          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#141414] text-[#BF9655]"
+          className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#16233A] text-[#FAF7F1]"
         >
           <ArrowLeft size={24} />
         </button>
         {step === 1 ? (
-          <h1 className="text-3xl font-extrabold uppercase tracking-wide text-[#BF9655]">
+          <h1 className="text-3xl font-extrabold uppercase tracking-wide text-[#FAF7F1]">
             Sugestão de Treino
           </h1>
         ) : (
-          <p className="text-sm font-bold uppercase tracking-widest text-[#BF9655]">
+          <p className="text-sm font-bold uppercase tracking-widest text-[#FAF7F1]">
             Passo {step} de 3
           </p>
         )}
@@ -134,7 +134,7 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
       {/* ---------------- PASSO 1: GÊNERO ---------------- */}
       {step === 1 && (
         <>
-          <p className="mb-2 text-center text-sm font-bold uppercase tracking-widest text-[#BF9655]">
+          <p className="mb-2 text-center text-sm font-bold uppercase tracking-widest text-[#FAF7F1]">
             Passo 1 de 3
           </p>
           <h2 className="mb-2 text-center text-4xl font-extrabold uppercase text-white">
@@ -155,10 +155,10 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                     setGenero(opcao.id)
                     setStep(2)
                   }}
-                  className={`group relative overflow-hidden rounded-2xl border bg-[#141414] transition ${
+                  className={`group relative overflow-hidden rounded-2xl border bg-[#16233A] transition ${
                     selecionado
-                      ? 'border-[#BF9655]'
-                      : 'border-white/10 hover:border-[#BF9655]'
+                      ? 'border-[#FAF7F1]'
+                      : 'border-[#24334D] hover:border-[#FAF7F1]'
                   }`}
                 >
                   <img
@@ -172,8 +172,8 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                   <span
                     className={`absolute inset-x-0 bottom-6 text-center text-xl font-bold uppercase tracking-wide transition ${
                       selecionado
-                        ? 'text-[#BF9655]'
-                        : 'text-white group-hover:text-[#BF9655]'
+                        ? 'text-[#FAF7F1]'
+                        : 'text-white group-hover:text-[#FAF7F1]'
                     }`}
                   >
                     {opcao.label}
@@ -188,7 +188,7 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
       {/* ---------------- PASSO 2: OBJETIVO ---------------- */}
       {step === 2 && (
         <>
-          <h2 className="mb-6 text-3xl font-extrabold uppercase text-[#BF9655]">
+          <h2 className="mb-6 text-3xl font-extrabold uppercase text-[#FAF7F1]">
             Qual seu Objetivo?
           </h2>
 
@@ -199,10 +199,10 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                 <button
                   key={obj.id}
                   onClick={() => setObjetivoSelecionado(obj.id)}
-                  className={`flex items-center gap-3 rounded-xl border bg-[#141414] px-5 py-4 text-sm font-bold uppercase tracking-wide transition ${
+                  className={`flex items-center gap-3 rounded-xl border bg-[#16233A] px-5 py-4 text-sm font-bold uppercase tracking-wide transition ${
                     selecionado
                       ? `${obj.cor.borda} ${obj.cor.texto}`
-                      : 'border-white/10 text-white hover:border-white/25'
+                      : 'border-[#24334D] text-white hover:border-white/25'
                   }`}
                 >
                   {/* cada objetivo tem sua cor, para bater o olho e reconhecer */}
@@ -225,14 +225,14 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
             {treinosFiltrados.map((treino) => (
               <div
                 key={treino.id}
-                className="overflow-hidden rounded-xl border border-white/10 bg-[#141414]"
+                className="overflow-hidden rounded-xl border border-[#24334D] bg-[#16233A]"
               >
                 <div className="relative">
                   <img
                     // `imagem` fica opcional: sem foto própria, usa a padrão
                     src={treino.imagem ?? treinoImg}
                     alt={treino.nome}
-                    className="h-32 w-full object-cover object-top"
+                    className="h-32 w-full object-cover objectobject-[50%_15%]"
                   />
                   <span
                     className={`absolute left-2 top-2 rounded px-2 py-1 text-[10px] font-bold uppercase ${
@@ -243,20 +243,20 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                   </span>
                 </div>
                 <div className="p-4">
-                  <h3 className="mb-1 text-lg font-extrabold uppercase text-[#BF9655]">
+                  <h3 className="mb-1 text-lg font-extrabold uppercase text-[#FAF7F1]">
                     {treino.nome}
                   </h3>
                   <div className="mb-4 flex items-center gap-2 text-xs">
                     <span
-                      className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.azul.chip}`}
+                      className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${pilulaNeutra}`}
                     >
-                      <Clock size={13} />
+                      <Clock size={13} className={paleta.azul.texto} />
                       {treino.duracaoMin} min
                     </span>
                     <span
-                      className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${paleta.verde.chip}`}
+                      className={`flex items-center gap-1 rounded-full px-2.5 py-1 font-bold ${pilulaNeutra}`}
                     >
-                      <Dumbbell size={13} />
+                      <Dumbbell size={13} className={paleta.verde.texto} />
                       {treino.exercicios.length} exercícios
                     </span>
                   </div>
@@ -265,7 +265,7 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                       setTreinoSelecionado(treino)
                       setStep(3)
                     }}
-                    className="w-full rounded-lg bg-[#BF9655] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
+                    className="w-full rounded-lg bg-[#FAF7F1] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
                   >
                     Ver Mais
                   </button>
@@ -279,14 +279,14 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
       {/* ---------------- PASSO 3: TREINO ---------------- */}
       {step === 3 && treinoSelecionado && (
         <>
-          <div className="mb-8 rounded-2xl border border-white/10 bg-[#141414] p-6">
-            <span className="mb-3 inline-block rounded bg-[#BF9655] px-3 py-1 text-xs font-bold uppercase text-black">
+          <div className="mb-8 rounded-2xl border border-[#24334D] bg-[#16233A] p-6">
+            <span className="mb-3 inline-block rounded bg-[#FAF7F1] px-3 py-1 text-xs font-bold uppercase text-black">
               Level: {treinoSelecionado.nivelDificuldade}
             </span>
 
             <div className="flex items-start justify-between gap-6">
               <div className="flex-1">
-                <h1 className="mb-2 text-3xl font-extrabold uppercase text-[#BF9655]">
+                <h1 className="mb-2 text-3xl font-extrabold uppercase text-[#FAF7F1]">
                   {treinoSelecionado.nome}
                 </h1>
                 <p className="mb-3 text-sm leading-relaxed text-gray-400">
@@ -294,15 +294,15 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                 </p>
                 <div className="flex items-center gap-2 text-xs">
                   <span
-                    className={`flex items-center gap-1 rounded-full px-3 py-1 font-bold ${paleta.azul.chip}`}
+                    className={`flex items-center gap-1 rounded-full px-3 py-1 font-bold ${pilulaNeutra}`}
                   >
-                    <Clock size={14} />
+                    <Clock size={14} className={paleta.azul.texto} />
                     {treinoSelecionado.duracaoMin} min
                   </span>
                   <span
-                    className={`flex items-center gap-1 rounded-full px-3 py-1 font-bold ${paleta.verde.chip}`}
+                    className={`flex items-center gap-1 rounded-full px-3 py-1 font-bold ${pilulaNeutra}`}
                   >
-                    <Dumbbell size={14} />
+                    <Dumbbell size={14} className={paleta.verde.texto} />
                     {exercicios.length} exercícios
                   </span>
                 </div>
@@ -329,7 +329,7 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
             {exercicios.map((ex) => (
               <div
                 key={ex.chave}
-                className="flex flex-col rounded-xl border border-white/10 bg-[#141414] p-4"
+                className="flex flex-col rounded-xl border border-[#24334D] bg-[#16233A] p-4"
               >
                 <ImagemComFallback
                   src={ex.modelo.imagemMaquina}
@@ -337,7 +337,7 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                   className="h-32 w-full rounded-xl"
                   ajuste="contain"
                 />
-                <h3 className="mb-1 mt-4 text-lg font-extrabold uppercase leading-tight text-[#BF9655]">
+                <h3 className="mb-1 mt-4 text-lg font-extrabold uppercase leading-tight text-[#FAF7F1]">
                   {ex.exercicio}
                 </h3>
                 <p className="mb-2 text-xs uppercase tracking-widest text-gray-500">
@@ -348,19 +348,22 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                   {ex.modelo.categorias.map((categoria) => (
                     <span
                       key={categoria}
-                      className={`rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${corDaCategoria[categoria].borda} ${corDaCategoria[categoria].chip}`}
+                      className={`flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${pilulaNeutra}`}
                     >
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${corDaCategoria[categoria].barra}`}
+                      />
                       {categoriaLabel(categoria)}
                     </span>
                   ))}
                 </div>
                 <p className="mb-1 text-sm font-bold text-white">{ex.series}</p>
-                <p className="mb-4 flex-1 text-sm text-orange-400/80">
+                <p className="mb-4 flex-1 text-sm text-gray-400">
                   Descanso: {ex.descanso}
                 </p>
                 <button
                   onClick={() => setExercicioTutorial(ex)}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#BF9655] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#FAF7F1] py-2.5 text-sm font-bold uppercase tracking-wide text-black transition hover:brightness-110"
                 >
                   Tutorial
                   <PlayCircle size={16} />

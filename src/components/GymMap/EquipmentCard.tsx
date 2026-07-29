@@ -6,9 +6,9 @@ import {
 } from '../../data/equipamentos'
 
 const corStatus: Record<StatusEquipamento, string> = {
-  livre: 'text-emerald-400',
-  'em-uso': 'text-orange-400',
-  manutencao: 'text-rose-400',
+  livre: 'text-emerald-300/80',
+  'em-uso': 'text-orange-300/80',
+  manutencao: 'text-rose-300/80',
 }
 
 /** bolinha de status ao lado do nome */
@@ -41,15 +41,15 @@ export default function EquipmentCard({
       aria-pressed={selecionado}
       className={`flex w-full items-center gap-4 rounded-xl border p-4 text-left transition ${
         selecionado
-          ? 'border-[#BF9655] bg-[#1F1B14]'
-          : 'border-white/10 bg-[#141414] hover:border-[#BF9655]/50'
+          ? 'border-[#FAF7F1] bg-[#1E2B44]'
+          : 'border-[#24334D] bg-[#16233A] hover:border-[#FAF7F1]/50'
       }`}
     >
       <span
         className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg transition ${
           selecionado
-            ? 'bg-[#BF9655] text-black'
-            : 'bg-[#0D0D0D] text-[#BF9655]/60'
+            ? 'bg-[#FAF7F1] text-black'
+            : 'bg-[#101A2B] text-[#FAF7F1]/60'
         }`}
       >
         <Dumbbell size={22} />
@@ -58,7 +58,7 @@ export default function EquipmentCard({
       <span className="min-w-0 flex-1">
         <span
           className={`block truncate text-sm font-bold uppercase tracking-wide ${
-            selecionado ? 'text-[#BF9655]' : 'text-white'
+            selecionado ? 'text-[#FAF7F1]' : 'text-white'
           }`}
         >
           {equipamento.nome}
@@ -70,7 +70,7 @@ export default function EquipmentCard({
           <span
             className={`h-1.5 w-1.5 shrink-0 rounded-full ${pontoStatus[status]}`}
           />
-          <span className="text-sky-400/80">
+          <span className="text-[#C4CEDC]">
             {equipamento.localizacao.area}
           </span>
           ·
@@ -97,9 +97,9 @@ export default function EquipmentCard({
             onAlternarFavorito(equipamento.id)
           }
         }}
-        className="shrink-0 p-1 text-[#BF9655] transition hover:brightness-125"
+        className="shrink-0 p-1 text-[#FAF7F1] transition hover:brightness-125"
       >
-        <Heart size={20} fill={favorito ? '#BF9655' : 'none'} />
+        <Heart size={20} fill={favorito ? '#FAF7F1' : 'none'} />
       </span>
     </button>
   )

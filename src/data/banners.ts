@@ -4,11 +4,11 @@
 // src/assets/banners e acrescente uma entrada aqui.
 // ============================================================
 
-import banner1 from '../assets/banners/banner1.jpeg'
-import banner2 from '../assets/banners/banner2.jpeg'
-import banner3 from '../assets/banners/banner3.jpeg'
-import banner4 from '../assets/banners/banner4.jpeg'
-import banner5 from '../assets/banners/banner5.jpeg'
+import banner1 from '../assets/banners/banner1.png'
+import banner2 from '../assets/banners/banner2.png'
+import banner3 from '../assets/banners/banner3.png'
+import banner4 from '../assets/banners/banner4.png'
+import banner5 from '../assets/banners/banner5.png'
 
 export interface Banner {
   id: string

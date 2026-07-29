@@ -19,7 +19,7 @@ import Header from "../components/Header";
 /** Moldura do totem: cabeçalho e rodapé comuns às telas navegáveis. */
 function LayoutTotem() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#212120]">
+    <div className="flex min-h-screen flex-col bg-[#26303b]">
       <Header />
       {/* flex-1: o conteúdo ocupa a sobra e o rodapé fica sempre visível */}
       <main className="flex flex-1 flex-col">

@@ -24,7 +24,7 @@ function BotaoZoom({
       onClick={onClick}
       disabled={desabilitado}
       aria-label={label}
-      className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/10 bg-[#141414] text-[#BF9655] transition hover:border-[#BF9655] disabled:opacity-30"
+      className="flex h-11 w-11 items-center justify-center rounded-lg border border-[#24334D] bg-[#16233A] text-[#FAF7F1] transition hover:border-[#FAF7F1] disabled:opacity-30"
     >
       {children}
     </button>

@@ -17,7 +17,7 @@ function Card({
   description,
   buttonLabel,
   imagem,
-  chip,
+  corIcone,
   onClick,
   className = '',
 }: {
@@ -25,8 +25,8 @@ function Card({
   title: string
   description: string
   buttonLabel: string
-  /** classes do chip do ícone */
-  chip: string
+  /** classe de cor do ícone */
+  corIcone: string
   /** foto de fundo do card — sem ela, fica só o fundo escuro */
   imagem?: string
   onClick?: () => void
@@ -49,7 +49,7 @@ function Card({
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B121C] via-[#0B121C]/60 to-[#0B121C]/40" />
 
       <div className="relative">
-        <div className={`mb-8 inline-flex rounded-2xl p-4 ${chip}`}>{icon}</div>
+        <div className={`mb-8 drop-shadow-lg ${corIcone}`}>{icon}</div>
         <h3
           className="mb-1 text-2xl font-bold uppercase tracking-wide drop-shadow-lg"
           style={{ color: cor.creme }}
@@ -90,7 +90,7 @@ export default function Home() {
           title="Sugestão de Treino"
           description="Algoritmos inteligentes para o seu objetivo hoje."
           buttonLabel="Abrir Sugestão"
-          chip={paleta.verde.chip}
+          corIcone={paleta.verde.texto}
           imagem={sugestaoImg}
           onClick={() => navigate('/suggest')}
         />
@@ -99,7 +99,7 @@ export default function Home() {
           title="Equipamentos"
           description="Aprenda a utilizar nosso equipamento premium."
           buttonLabel="Ver Tutorial"
-          chip={paleta.azul.chip}
+          corIcone={paleta.azul.texto}
           imagem={equipamentosImg}
           onClick={() => navigate('/machines')}
         />
@@ -108,7 +108,7 @@ export default function Home() {
           title="Mapa da Academia"
           description="Localize as zonas de treino e amenities."
           buttonLabel="Ver Mapa"
-          chip={paleta.vermelho.chip}
+          corIcone={paleta.vermelho.texto}
           imagem={mapaImg}
           onClick={() => navigate('/map')}
         />
@@ -117,7 +117,7 @@ export default function Home() {
           title="Desafios"
           description="Ranking dos moradores e desafios da comunidade."
           buttonLabel="Ver Desafios"
-          chip={paleta.amarelo.chip}
+          corIcone={paleta.amarelo.texto}
           imagem={desafiosImg}
           onClick={() => navigate('/desafios')}
         />

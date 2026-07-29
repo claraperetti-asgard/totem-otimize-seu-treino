@@ -450,9 +450,9 @@ export const objetivoLabel: Record<Objetivo, string> = {
 
 /** Classes do selo de nível — mesmas em todas as telas. */
 export const nivelStyles: Record<Nivel, string> = {
-  'GOLD LEVEL': 'bg-[#BF9655] text-black',
-  'SILVER LEVEL': 'bg-gray-300 text-black',
-  'BRONZE LEVEL': 'bg-orange-800 text-white',
+  'GOLD LEVEL': 'bg-amber-200 text-[#1B2436]',
+  'SILVER LEVEL': 'bg-slate-200 text-[#1B2436]',
+  'BRONZE LEVEL': 'bg-orange-300 text-[#1B2436]',
 }
 
 export function buscarTreino(id: string): Treino | undefined {
