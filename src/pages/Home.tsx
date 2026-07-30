@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import ChamadoManutencaoModal from '../components/ChamadoManutencaoModal'
 import AutenticacaoModal from '../components/AutenticacaoModal'
 import BannerSlider from '../components/BannerSlider'
+import SeloVip from '../components/SeloVip'
 import { cor } from '../theme/paletaAzul'
 import { paleta } from '../theme/cores'
 import sugestaoImg from '../assets/sugestao.png'
@@ -18,6 +19,7 @@ function Card({
   buttonLabel,
   imagem,
   corIcone,
+  vip = false,
   onClick,
   className = '',
 }: {
@@ -29,6 +31,8 @@ function Card({
   corIcone: string
   /** foto de fundo do card — sem ela, fica só o fundo escuro */
   imagem?: string
+  /** marca o módulo como recurso de conta paga */
+  vip?: boolean
   onClick?: () => void
   className?: string
 }) {
@@ -47,6 +51,8 @@ function Card({
         />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B121C] via-[#0B121C]/60 to-[#0B121C]/40" />
+
+      {vip && <SeloVip className="absolute right-5 top-5" />}
 
       <div className="relative">
         <div className={`mb-8 drop-shadow-lg ${corIcone}`}>{icon}</div>
@@ -117,6 +123,7 @@ export default function Home() {
           title="Desafios"
           description="Ranking dos moradores e desafios da comunidade."
           buttonLabel="Ver Desafios"
+          vip
           corIcone={paleta.amarelo.texto}
           imagem={desafiosImg}
           onClick={() => navigate('/desafios')}
@@ -134,6 +141,7 @@ export default function Home() {
         className="flex w-full items-center justify-center gap-2 rounded-2xl py-5 text-sm font-extrabold uppercase tracking-[0.15em] transition hover:brightness-110"
         style={{ backgroundColor: cor.creme, color: cor.tinta }}
       >
+        <SeloVip claro />
         Entrar / Registrar-se
       </button>
 
@@ -146,6 +154,10 @@ export default function Home() {
         style={{ backgroundColor: cor.cartaoEscuro, color: cor.creme }}
       >
         <Wrench size={28} />
+        <SeloVip
+          compacto
+          className="absolute -right-1 -top-1 border-2 border-[#26303b] bg-amber-300 text-[#1B2436]"
+        />
       </button>
 
       {chamadoAberto && (

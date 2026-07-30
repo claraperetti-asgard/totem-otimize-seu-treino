@@ -11,6 +11,7 @@ import {
 import { QRCodeSVG } from 'qrcode.react'
 import EquipamentoModal from '../components/EquipamentoModal'
 import ImagemComFallback from '../components/ImagemComFallback'
+import SeloVip from '../components/SeloVip'
 import { urlDoTreino } from '../data/treinos'
 import homemImg from '../assets/homem.png'
 import mulherImg from '../assets/mulher.png'
@@ -320,6 +321,10 @@ export default function SuggestWorkOut({ onExit }: SuggestWorkOutProps) {
                 />
                 <span className="text-center text-[10px] font-bold uppercase">
                   Acesse pelo Celular
+                </span>
+                <SeloVip claro />
+                <span className="text-center text-[9px] leading-tight text-gray-500">
+                  Salvar o treino concluído exige conta
                 </span>
               </div>
             </div>
